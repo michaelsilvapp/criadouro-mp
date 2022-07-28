@@ -14,7 +14,7 @@ export class BirdsComponent implements OnInit {
 
     onOpenDialogCreate() {
         const dialogRef = this.dialog.open(BirdFormComponent, {
-            data: { name: "Cadastrar", ganders: ["Macho", "Fêmea"] }
+            data: { name: "Cadastrar" }
         });
 
         dialogRef.afterClosed().subscribe((result) => {

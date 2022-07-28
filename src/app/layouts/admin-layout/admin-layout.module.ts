@@ -21,8 +21,13 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatDialogModule } from "@angular/material/dialog";
 
+//COMPONENT
 import { BirdsComponent } from "../../modules/birds/birds.component";
 import { BirdFormComponent } from "../../modules/birds/birds-form/birds-form.component";
+
+//SERVICE
+import { CreatoresServices } from "../../services/creators/creators.services";
+import { MutationsServices } from "../../services/mutations/mutations.service";
 
 @NgModule({
     imports: [
@@ -51,6 +56,7 @@ import { BirdFormComponent } from "../../modules/birds/birds-form/birds-form.com
         UpgradeComponent,
         BirdsComponent,
         BirdFormComponent
-    ]
+    ],
+    providers: [CreatoresServices, MutationsServices]
 })
 export class AdminLayoutModule {}

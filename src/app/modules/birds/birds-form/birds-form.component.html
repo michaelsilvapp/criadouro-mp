@@ -7,111 +7,196 @@
                     <!-- <p class="card-category">Adicione </p> -->
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form (submit)="onSave()">
                         <div class="row">
                             <div class="col-md-5">
                                 <mat-form-field class="example-full-width">
                                     <input
                                         matInput
-                                        placeholder="Anilha"
-                                        disabled
+                                        [(ngModel)]="document.washer"
+                                        name="washer"
+                                        placeholder="Nº Anilha"
                                     />
                                 </mat-form-field>
                             </div>
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Ano" />
+                                    <input
+                                        matInput
+                                        [(ngModel)]="document.year"
+                                        name="year"
+                                        placeholder="Ano"
+                                    />
                                 </mat-form-field>
                             </div>
                             <div class="col-md-4">
                                 <mat-form-field>
-                                    <mat-label>Sexo</mat-label>
-                                    <mat-select>
+                                    <mat-label>Criador</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.creator"
+                                        name="creator"
+                                    >
                                         <mat-option
-                                            *ngFor="let gander of data.ganders"
-                                            [value]="gander"
-                                            >{{ gander }}</mat-option
+                                            *ngFor="let creator of creators"
+                                            [value]="creator"
+                                            >{{ creator.name }}</mat-option
                                         >
                                     </mat-select>
                                 </mat-form-field>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <mat-form-field class="example-full-width">
-                                    <input
-                                        matInput
-                                        placeholder="Fist Name"
-                                        type="text"
-                                    />
-                                </mat-form-field>
-                            </div>
-                            <div class="col-md-6">
-                                <mat-form-field class="example-full-width">
-                                    <input
-                                        matInput
-                                        placeholder="Last Name"
-                                        type="text"
-                                    />
-                                </mat-form-field>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <mat-form-field class="example-full-width">
-                                    <input
-                                        matInput
-                                        placeholder="Adress"
-                                        type="text"
-                                    />
-                                </mat-form-field>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                    <input
-                                        matInput
-                                        placeholder="City"
-                                        type="text"
-                                    />
+                                <mat-form-field>
+                                    <mat-label>Sexo</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.gander"
+                                        name="gander"
+                                    >
+                                        <mat-option
+                                            *ngFor="let gander of ganders"
+                                            [value]="gander"
+                                            >{{ gander }}</mat-option
+                                        >
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                             <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
                                     <input
                                         matInput
-                                        placeholder="Country"
-                                        type="text"
+                                        [(ngModel)]="document.weight"
+                                        name="weight"
+                                        placeholder="Peso (gramas)"
                                     />
                                 </mat-form-field>
                             </div>
                             <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                    <input
-                                        matInput
-                                        placeholder="Postal Code"
-                                        type="text"
-                                    />
+                                <mat-form-field>
+                                    <mat-label>Linha</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.lineage"
+                                        name="lineage"
+                                    >
+                                        <mat-option
+                                            *ngFor="let lineage of lineages"
+                                            [value]="lineage"
+                                            >{{ lineage }}</mat-option
+                                        >
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
-                                <label>About Me</label>
-                                <mat-form-field class="example-full-width">
-                                    <textarea
-                                        matInput
-                                        placeholder="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
-                                    ></textarea>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-label>Fenotipo 1</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.mutation1"
+                                        name="mutation0"
+                                    >
+                                        <mat-option
+                                            *ngFor="let mutation of mutations"
+                                            [value]="mutation.name"
+                                            >{{ mutation.name }}</mat-option
+                                        >
+                                    </mat-select>
                                 </mat-form-field>
-                                <!-- <div class="form-group">
-
-                                      <div class="form-group">
-                                          <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
-                                          <textarea class="form-control" rows="5"></textarea>
-                                      </div>
-                                  </div> -->
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-label>Fenotipo 2</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.mutation2"
+                                        name="mutation1"
+                                    >
+                                        <mat-option
+                                            *ngFor="let mutation of mutations"
+                                            [value]="mutation.name"
+                                            >{{ mutation.name }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-label>Fenotipo 3</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.mutation3"
+                                        name="mutation1"
+                                    >
+                                        <mat-option
+                                            *ngFor="let mutation of mutations"
+                                            [value]="mutation"
+                                            >{{ mutation.name }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-label>Fenotipo 4</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.mutation4"
+                                        name="mutation4"
+                                    >
+                                        <mat-option
+                                            *ngFor="let mutation of mutations"
+                                            [value]="mutation"
+                                            >{{ mutation.name }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-label>Genotipo 1</mat-label>
+                                    <mat-select>
+                                        <mat-option
+                                            *ngFor="let mutation of mutations"
+                                            [value]="mutation"
+                                            >{{ mutation.name }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-label>Genotipo 2</mat-label>
+                                    <mat-select>
+                                        <mat-option
+                                            *ngFor="let mutation of mutations"
+                                            [value]="mutation"
+                                            >{{ mutation.name }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-label>Genotipo 3</mat-label>
+                                    <mat-select>
+                                        <mat-option
+                                            *ngFor="let mutation of mutations"
+                                            [value]="mutation"
+                                            >{{ mutation.name }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-label>Genotipo 4</mat-label>
+                                    <mat-select>
+                                        <mat-option
+                                            *ngFor="let mutation of mutations"
+                                            [value]="mutation"
+                                            >{{ mutation.name }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
                             </div>
                         </div>
                         <button
@@ -119,7 +204,7 @@
                             type="submit"
                             class="btn btn-success pull-right"
                         >
-                            Update Profile
+                            Salvar
                         </button>
                         <div class="clearfix"></div>
                     </form>
