@@ -1,0 +1,83 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <button
+            class="btn btn-success btn-round"
+            mat-button
+            (click)="onOpenDialogCreate()"
+        >
+            + Novo
+        </button>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title">Forpus</h4>
+                        <p class="card-category">Aves do Plantel</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="text-success">
+                                    <th class="text-left">Anilha</th>
+                                    <th class="text-left">Ano</th>
+                                    <th class="text-left">Criador</th>
+                                    <th class="text-left">Codinome</th>
+                                    <th class="text-left">Fenótipo</th>
+                                    <th class="text-left">Genótipo</th>
+                                    <th class="text-left">Sexo</th>
+                                    <th class="text-left">Peso</th>
+                                    <th class="text-left">Status</th>
+                                    <th class="text-left">Ações</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left">317</td>
+                                        <td class="text-left">2017</td>
+                                        <td class="text-left">
+                                            Sergio: BH-030
+                                        </td>
+                                        <td class="text-left">Sara</td>
+                                        <td class="text-left">
+                                            Americano Azul
+                                        </td>
+                                        <td class="text-left">Cinza, Fulvo</td>
+                                        <td class="text-left">Macho</td>
+                                        <td class="text-left">38,4</td>
+                                        <td class="text-left">No Criatorio</td>
+                                        <!-- <td class="text-primary">$36,738</td> -->
+                                        <td class="td-actions text-left">
+                                            <button
+                                                mat-raised-button
+                                                type="button"
+                                                matTooltip="Editar"
+                                                (click)="onOpenDialogEdit()"
+                                                [matTooltipPosition]="'above'"
+                                                class="btn btn-primary btn-link btn-sm btn-just-icon"
+                                            >
+                                                <i class="material-icons"
+                                                    >edit</i
+                                                >
+                                            </button>
+                                            <button
+                                                mat-raised-button
+                                                type="button"
+                                                matTooltip="Remove"
+                                                [matTooltipPosition]="'above'"
+                                                class="btn btn-danger btn-link btn-sm btn-just-icon"
+                                            >
+                                                <i class="material-icons"
+                                                    >close</i
+                                                >
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
