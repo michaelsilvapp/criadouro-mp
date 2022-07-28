@@ -153,7 +153,10 @@
                             <div class="col-md-3">
                                 <mat-form-field>
                                     <mat-label>Genotipo 1</mat-label>
-                                    <mat-select>
+                                    <mat-select
+                                        [(ngModel)]="document.mutation1"
+                                        name="mutation1"
+                                    >
                                         <mat-option
                                             *ngFor="let mutation of mutations"
                                             [value]="mutation"
@@ -165,7 +168,10 @@
                             <div class="col-md-3">
                                 <mat-form-field>
                                     <mat-label>Genotipo 2</mat-label>
-                                    <mat-select>
+                                    <mat-select
+                                        [(ngModel)]="document.mutation2"
+                                        name="mutation2"
+                                    >
                                         <mat-option
                                             *ngFor="let mutation of mutations"
                                             [value]="mutation"
@@ -177,7 +183,10 @@
                             <div class="col-md-3">
                                 <mat-form-field>
                                     <mat-label>Genotipo 3</mat-label>
-                                    <mat-select>
+                                    <mat-select
+                                        [(ngModel)]="document.mutation3"
+                                        name="mutation3"
+                                    >
                                         <mat-option
                                             *ngFor="let mutation of mutations"
                                             [value]="mutation"
@@ -189,7 +198,10 @@
                             <div class="col-md-3">
                                 <mat-form-field>
                                     <mat-label>Genotipo 4</mat-label>
-                                    <mat-select>
+                                    <mat-select
+                                        [(ngModel)]="document.mutation4"
+                                        name="mutation4"
+                                    >
                                         <mat-option
                                             *ngFor="let mutation of mutations"
                                             [value]="mutation"
