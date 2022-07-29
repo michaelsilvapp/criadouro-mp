@@ -10,7 +10,6 @@ import { TypographyComponent } from "../../typography/typography.component";
 import { IconsComponent } from "../../icons/icons.component";
 import { MapsComponent } from "../../maps/maps.component";
 import { NotificationsComponent } from "../../notifications/notifications.component";
-import { UpgradeComponent } from "../../upgrade/upgrade.component";
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
 import { MatRippleModule } from "@angular/material/core";
@@ -28,7 +27,7 @@ import { BirdFormComponent } from "../../modules/birds/birds-form/birds-form.com
 //SERVICE
 import { CreatoresServices } from "../../services/creators/creators.services";
 import { MutationsServices } from "../../services/mutations/mutations.service";
-
+import { BirdsService } from "../../services/birds/birds.service";
 @NgModule({
     imports: [
         CommonModule,
@@ -53,10 +52,10 @@ import { MutationsServices } from "../../services/mutations/mutations.service";
         IconsComponent,
         MapsComponent,
         NotificationsComponent,
-        UpgradeComponent,
+
         BirdsComponent,
         BirdFormComponent
     ],
-    providers: [CreatoresServices, MutationsServices]
+    providers: [CreatoresServices, MutationsServices, BirdsService]
 })
 export class AdminLayoutModule {}

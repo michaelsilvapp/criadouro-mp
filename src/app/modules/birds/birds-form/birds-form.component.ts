@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreatoresServices } from "../../../services/creators/creators.services";
+import { BirdsService } from "../../../services/birds/birds.service";
 import { MutationsServices } from "../../../services/mutations/mutations.service";
 export interface DialogData {
     name: string;
@@ -17,11 +18,14 @@ export class BirdFormComponent implements OnInit {
     public ganders: string[];
     public mutations: any[];
 
+    public BirdSerices: BirdsService;
+
     public document: any = {};
 
     constructor(
         public dialogRef: MatDialogRef<BirdFormComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: DialogData
+        @Inject(MAT_DIALOG_DATA) public data: DialogData,
+        private birdsService: BirdsService
     ) {
         console.log(this.data);
     }
@@ -36,7 +40,24 @@ export class BirdFormComponent implements OnInit {
         this.mutations = new MutationsServices().getList();
     }
 
-    onSave() {
-        console.log("executou", this.document);
+    async onSave() {
+        console.log(this.birdsService);
+
+        await this.birdsService
+            .insert({
+                washer: "18",
+                year: "2018",
+                creator: { name: "Kiko", code: "OT-305" },
+                gander: "Macho",
+                weight: "40,5",
+                lineage: "Verde",
+                phenotype1: "Jade",
+                phenotype2: "Fulvo",
+                genotype1: { name: "Americano" },
+                genotype2: { name: "Azul" }
+            })
+            .subscribe((data) => {
+                console.log(data);
+            });
     }
 }
