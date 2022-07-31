@@ -22,36 +22,57 @@
                                     <th class="text-left">Anilha</th>
                                     <th class="text-left">Ano</th>
                                     <th class="text-left">Criador</th>
-                                    <th class="text-left">Codinome</th>
+                                    <th class="text-left">Linha</th>
                                     <th class="text-left">Fenótipo</th>
                                     <th class="text-left">Genótipo</th>
                                     <th class="text-left">Sexo</th>
                                     <th class="text-left">Peso</th>
-                                    <th class="text-left">Status</th>
                                     <th class="text-left">Ações</th>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="text-left">317</td>
-                                        <td class="text-left">2017</td>
+                                    <tr *ngFor="let birdItem of birdsList">
                                         <td class="text-left">
-                                            Sergio: BH-030
+                                            {{ birdItem.washer }}
                                         </td>
-                                        <td class="text-left">Sara</td>
                                         <td class="text-left">
-                                            Americano Azul
+                                            {{ birdItem.year }}
                                         </td>
-                                        <td class="text-left">Cinza, Fulvo</td>
-                                        <td class="text-left">Macho</td>
-                                        <td class="text-left">38,4</td>
-                                        <td class="text-left">No Criatorio</td>
+                                        <td class="text-left">
+                                            {{ birdItem.creator.name }}:
+                                            {{ birdItem.creator.code }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ birdItem.lineage }}
+                                        </td>
+
+                                        <td class="text-left">
+                                            {{ birdItem.phenotype1 }}
+                                            {{ birdItem.phenotype2 }}
+                                            {{ birdItem.phenotype3 }}
+                                            {{ birdItem.phenotype4 }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ birdItem.genotype1 }}
+                                            {{ birdItem.genotype2 }}
+                                            {{ birdItem.genotype3 }}
+                                            {{ birdItem.genotype4 }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ birdItem.gander }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ birdItem.weight }}g
+                                        </td>
+
                                         <!-- <td class="text-primary">$36,738</td> -->
                                         <td class="td-actions text-left">
                                             <button
                                                 mat-raised-button
                                                 type="button"
                                                 matTooltip="Editar"
-                                                (click)="onOpenDialogEdit()"
+                                                (click)="
+                                                    onOpenDialogEdit(birdItem)
+                                                "
                                                 [matTooltipPosition]="'above'"
                                                 class="btn btn-primary btn-link btn-sm btn-just-icon"
                                             >
@@ -64,6 +85,9 @@
                                                 type="button"
                                                 matTooltip="Remove"
                                                 [matTooltipPosition]="'above'"
+                                                (click)="
+                                                    onOpenDialogEdit(birdItem)
+                                                "
                                                 class="btn btn-danger btn-link btn-sm btn-just-icon"
                                             >
                                                 <i class="material-icons"

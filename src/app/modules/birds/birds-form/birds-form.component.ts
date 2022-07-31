@@ -31,6 +31,10 @@ export class BirdFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        if (this.data.bird) {
+            this.document = this.data.bird;
+        }
+
         this.creators = new CreatoresServices().getList();
 
         this.ganders = ["Macho", "Fêmea", "Desconhecido"];
