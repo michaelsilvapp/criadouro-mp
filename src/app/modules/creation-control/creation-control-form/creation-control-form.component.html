@@ -1,13 +1,13 @@
-<div mat-dialog-content>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header card-header-success">
-                    <h4 class="card-title">{{ data.name }} Postura</h4>
-                    <!-- <p class="card-category">Adicione </p> -->
-                </div>
-                <div class="card-body">
-                    <form (submit)="onSave()">
+<form (submit)="onSave()">
+    <div mat-dialog-content>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title">{{ data.name }} Postura</h4>
+                        <!-- <p class="card-category">Adicione </p> -->
+                    </div>
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
@@ -94,8 +94,8 @@
                                 <mat-form-field>
                                     <mat-label>Fêmea</mat-label>
                                     <mat-select
-                                        [(ngModel)]="document.male"
-                                        name="male"
+                                        [(ngModel)]="document.female"
+                                        name="female"
                                     >
                                         <mat-option
                                             *ngFor="let female of birdsFemale"
@@ -198,14 +198,8 @@
                         <div
                             class="row"
                             *ngFor="
-                                let numberOfPuppie of [
-                                    '1',
-                                    '2',
-                                    '3',
-                                    '4',
-                                    '5',
-                                    '6'
-                                ]
+                                let numberOfPuppie of [0, 1, 2, 3, 4, 5];
+                                let index = i
                             "
                         >
                             <div class="col-md-2">
@@ -214,31 +208,46 @@
                                         type="number"
                                         matInput
                                         [(ngModel)]="
-                                            document.numberWasher[
-                                                numberOfPuppie
-                                            ]
+                                            document.birdsPuppie[numberOfPuppie]
+                                                .numberWasher
                                         "
                                         name="numberWasher"
                                         placeholder="Nº da anilha"
                                     />
                                 </mat-form-field>
                             </div>
+                            <div class="col-md-2">
+                                <mat-form-field>
+                                    <mat-label>Sexo</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="
+                                            document.birdsPuppie[numberOfPuppie]
+                                                .gander
+                                        "
+                                        name="gander"
+                                    >
+                                        <mat-option
+                                            *ngFor="let gander of ganders"
+                                            [value]="gander"
+                                            >{{ gander }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
 
                             <div
                                 class="col-md-2"
-                                *ngFor="let genotype of ['1', '2', '3', '4']"
+                                *ngFor="let numberGenotype of [0, 1, 2, 3]"
                             >
                                 <mat-form-field>
                                     <mat-label
-                                        >Genotipo {{ genotype }}
+                                        >Genotipo {{ numberGenotype }}
                                     </mat-label>
                                     <mat-select
                                         [(ngModel)]="
-                                            document.genotype[numberOfPuppie][
-                                                genotype
-                                            ]
+                                            document.birdsPuppie[numberOfPuppie]
+                                                .genotype[numberGenotype]
                                         "
-                                        name="genotype1"
                                     >
                                         <mat-option
                                             *ngFor="let mutation of mutations"
@@ -251,15 +260,19 @@
                         </div>
 
                         <div class="clearfix"></div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<mat-dialog-actions align="end">
-    <button mat-raised-button type="submit" class="btn btn-success pull-right">
-        Salvar
-    </button>
-</mat-dialog-actions>
+    <mat-dialog-actions align="end">
+        <button
+            mat-raised-button
+            type="submit"
+            class="btn btn-success pull-right"
+        >
+            Salvar
+        </button>
+    </mat-dialog-actions>
+</form>

@@ -43,6 +43,15 @@ export class CreationControlFormComponent implements OnInit {
             this.document = this.data.bird;
         }
 
+        this.document.birdsPuppie = [
+            { numberWasher: "", gander: "", genotype: [] },
+            { numberWasher: "", gander: "", genotype: [] },
+            { numberWasher: "", gander: "", genotype: [] },
+            { numberWasher: "", gander: "", genotype: [] },
+            { numberWasher: "", gander: "", genotype: [] },
+            { numberWasher: "", gander: "", genotype: [] }
+        ];
+
         this.birdsFemale = await (
             await this.birdsService.get({})
         ).filter((b) => b.gander == "Fêmea");
@@ -101,23 +110,23 @@ export class CreationControlFormComponent implements OnInit {
     // }
 
     async onSave() {
-        console.log(this.birdsService);
+        console.log(this.document);
 
-        await this.birdsService
-            .insert({
-                washer: "18",
-                year: "2018",
-                creator: { name: "Kiko", code: "OT-305" },
-                gander: "Macho",
-                weight: "40,5",
-                lineage: "Verde",
-                phenotype1: "Jade",
-                phenotype2: "Fulvo",
-                genotype1: { name: "Americano" },
-                genotype2: { name: "Azul" }
-            })
-            .subscribe((data) => {
-                console.log(data);
-            });
+        // await this.birdsService
+        //     .insert({
+        //         washer: "18",
+        //         year: "2018",
+        //         creator: { name: "Kiko", code: "OT-305" },
+        //         gander: "Macho",
+        //         weight: "40,5",
+        //         lineage: "Verde",
+        //         phenotype1: "Jade",
+        //         phenotype2: "Fulvo",
+        //         genotype1: { name: "Americano" },
+        //         genotype2: { name: "Azul" }
+        //     })
+        //     .subscribe((data) => {
+        //         console.log(data);
+        //     });
     }
 }
