@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 @Injectable({ providedIn: "root" })
 export class BirdsService {
     public baseURL: string =
-        "https://i4kx4zz18b.execute-api.us-east-1.amazonaws.com/production";
+        "https://wv3bbjeob6.execute-api.us-east-1.amazonaws.com";
 
     constructor(public http: HttpClient) {}
 
@@ -15,8 +15,6 @@ export class BirdsService {
     // }
 
     insert(bird: any): Observable<any> {
-        console.log(JSON.stringify(bird));
-
         const headers = {
             "content-type": "application/json",
             "x-api-key": "d37DXdpSIb9B3xT9wHi4N5do6145zcxk9P42zixM",

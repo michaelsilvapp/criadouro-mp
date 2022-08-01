@@ -57,11 +57,11 @@ export class BirdFormComponent implements OnInit {
                 lineage: "Verde",
                 phenotype1: "Jade",
                 phenotype2: "Fulvo",
-                genotype1: { name: "Americano" },
-                genotype2: { name: "Azul" }
+                genotype1: "Americano",
+                genotype2: "Azul"
             })
             .subscribe((data) => {
-                console.log(data);
+                console.log("RETORNO", data);
             });
     }
 }
