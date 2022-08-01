@@ -66,6 +66,17 @@ export class BirdsService {
                 lineage: "Verde",
                 phenotype1: "Lutino",
                 genotype1: "Azul"
+            },
+            {
+                _id: "fdsajklr32u23fkdajklfff",
+                washer: "20",
+                year: "2021",
+                creator: { name: "Michael", code: "OT-128" },
+                gander: "Fêmea",
+                weight: "40,5",
+                lineage: "Azul",
+                phenotype1: "Cobalto",
+                genotype1: "Fulvo"
             }
         ];
 

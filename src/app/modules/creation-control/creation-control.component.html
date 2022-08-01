@@ -1,67 +1,91 @@
 <div class="main-content">
     <div class="container-fluid">
-        <button
-            class="btn btn-success btn-round"
-            mat-button
-            (click)="onOpenDialogCreate()"
-        >
-            Novo
-        </button>
-
+        <div class="row">
+            <div class="col-md-2">
+                <button
+                    class="btn btn-success btn-round"
+                    mat-button
+                    (click)="onOpenDialogCreate()"
+                >
+                    Novo
+                </button>
+            </div>
+            <div class="col-md-3 offset-md-7">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Ano da Temporada: </mat-label>
+                    <mat-select [(ngModel)]="year" name="year">
+                        <mat-option *ngFor="let year of years" [value]="year">{{
+                            year
+                        }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-success">
-                        <h4 class="card-title">Forpus</h4>
-                        <p class="card-category">Aves do Plantel</p>
+                        <h4 class="card-title">Posturas</h4>
+                        <p class="card-category">
+                            Controle de Criação Temporada
+                        </p>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table table-bordered">
                                 <thead class="text-success">
-                                    <th class="text-left">Anilha</th>
-                                    <th class="text-left">Ano</th>
-                                    <th class="text-left">Criador</th>
-                                    <th class="text-left">Linha</th>
-                                    <th class="text-left">Fenótipo</th>
-                                    <th class="text-left">Genótipo</th>
-                                    <th class="text-left">Sexo</th>
-                                    <th class="text-left">Peso</th>
+                                    <th>Gaiola Nº</th>
+                                    <th>Postura</th>
+                                    <th>Macho</th>
+                                    <th>Fêmea</th>
+                                    <th>Total de Ovos</th>
+                                    <th>Total de Filhotes</th>
+
                                     <th class="text-left">Ações</th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let birdItem of birdsList">
-                                        <td class="text-left">
-                                            {{ birdItem.washer }}
-                                        </td>
-                                        <td class="text-left">
-                                            {{ birdItem.year }}
-                                        </td>
-                                        <td class="text-left">
-                                            {{ birdItem.creator.name }}:
-                                            {{ birdItem.creator.code }}
-                                        </td>
-                                        <td class="text-left">
-                                            {{ birdItem.lineage }}
+                                    <tr
+                                        *ngFor="
+                                            let creationControlItem of creationControlList
+                                        "
+                                    >
+                                        <td>
+                                            {{ creationControlItem.birdCage }}
                                         </td>
 
-                                        <td class="text-left">
-                                            {{ birdItem.phenotype1 }}
-                                            {{ birdItem.phenotype2 }}
-                                            {{ birdItem.phenotype3 }}
-                                            {{ birdItem.phenotype4 }}
+                                        <td>
+                                            {{ creationControlItem.posture }}
                                         </td>
-                                        <td class="text-left">
-                                            {{ birdItem.genotype1 }}
-                                            {{ birdItem.genotype2 }}
-                                            {{ birdItem.genotype3 }}
-                                            {{ birdItem.genotype4 }}
+
+                                        <td>
+                                            {{
+                                                creationControlItem.male
+                                                    .phenotype
+                                            }}
+                                            |
+                                            {{ creationControlItem.male.code }}
                                         </td>
-                                        <td class="text-left">
-                                            {{ birdItem.gander }}
+
+                                        <td>
+                                            {{
+                                                creationControlItem.female
+                                                    .phenotype
+                                            }}
+                                            |
+
+                                            {{
+                                                creationControlItem.female.code
+                                            }}
                                         </td>
-                                        <td class="text-left">
-                                            {{ birdItem.weight }}g
+
+                                        <td>
+                                            {{ creationControlItem.totalEggs }}
+                                        </td>
+
+                                        <td>
+                                            {{
+                                                creationControlItem.totalPuppies
+                                            }}
                                         </td>
 
                                         <!-- <td class="text-primary">$36,738</td> -->
@@ -71,7 +95,9 @@
                                                 type="button"
                                                 matTooltip="Editar"
                                                 (click)="
-                                                    onOpenDialogEdit(birdItem)
+                                                    onOpenDialogEdit(
+                                                        creationControlItem
+                                                    )
                                                 "
                                                 [matTooltipPosition]="'above'"
                                                 class="btn btn-primary btn-link btn-sm btn-just-icon"
@@ -86,7 +112,9 @@
                                                 matTooltip="Remove"
                                                 [matTooltipPosition]="'above'"
                                                 (click)="
-                                                    onOpenDialogEdit(birdItem)
+                                                    onOpenDialogEdit(
+                                                        creationControlItem
+                                                    )
                                                 "
                                                 class="btn btn-danger btn-link btn-sm btn-just-icon"
                                             >

@@ -32,6 +32,7 @@ import { CreationControlFormComponent } from "../../modules/creation-control/cre
 import { CreatoresServices } from "../../services/creators/creators.services";
 import { MutationsServices } from "../../services/mutations/mutations.service";
 import { BirdsService } from "../../services/birds/birds.service";
+import { CreationControlService } from "../../services/creation-control/creation-control.service";
 @NgModule({
     imports: [
         CommonModule,
@@ -64,6 +65,11 @@ import { BirdsService } from "../../services/birds/birds.service";
         CreationControlComponent,
         CreationControlFormComponent
     ],
-    providers: [CreatoresServices, MutationsServices, BirdsService]
+    providers: [
+        CreatoresServices,
+        MutationsServices,
+        BirdsService,
+        CreationControlService
+    ]
 })
 export class AdminLayoutModule {}
