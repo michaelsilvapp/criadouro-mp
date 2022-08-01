@@ -9,15 +9,15 @@ import { MapsComponent } from "../../maps/maps.component";
 import { NotificationsComponent } from "../../notifications/notifications.component";
 
 import { BirdsComponent } from "../../modules/birds/birds.component";
-
+import { CreationControlComponent } from "../../modules/creation-control/creation-control.component";
 export const AdminLayoutRoutes: Routes = [
     { path: "dashboard", component: DashboardComponent },
-    { path: "user-profile", component: UserProfileComponent },
-    { path: "table-list", component: TableListComponent },
-    { path: "typography", component: TypographyComponent },
-    { path: "icons", component: IconsComponent },
-    { path: "maps", component: MapsComponent },
-    { path: "notifications", component: NotificationsComponent },
-
-    { path: "aves", component: BirdsComponent }
+    // { path: "user-profile", component: UserProfileComponent },
+    // { path: "table-list", component: TableListComponent },
+    // { path: "typography", component: TypographyComponent },
+    // { path: "icons", component: IconsComponent },
+    // { path: "maps", component: MapsComponent },
+    // { path: "notifications", component: NotificationsComponent },
+    { path: "aves", component: BirdsComponent },
+    { path: "posturas", component: CreationControlComponent }
 ];

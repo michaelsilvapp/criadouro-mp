@@ -61,7 +61,7 @@ export class BirdsService {
                 washer: "20",
                 year: "2021",
                 creator: { name: "Michael", code: "OT-128" },
-                gander: "Macho",
+                gander: "Fêmea",
                 weight: "40,5",
                 lineage: "Verde",
                 phenotype1: "Lutino",

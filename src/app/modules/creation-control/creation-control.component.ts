@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { BirdFormComponent } from "./birds-form/birds-form.component";
+import { CreationControlFormComponent } from "./creation-control-form/creation-control-form.component";
 import { BirdsService } from "../../services/birds/birds.service";
 @Component({
-    selector: "birds",
-    templateUrl: "./birds.component.html",
-    styleUrls: ["./birds.component.css"]
+    selector: "creation-control",
+    templateUrl: "./creation-control.component.html",
+    styleUrls: ["./creation-control.css"]
 })
-export class BirdsComponent implements OnInit {
+export class CreationControlComponent implements OnInit {
     constructor(public dialog: MatDialog, private birdsService: BirdsService) {
         this.birdsService = birdsService;
     }
@@ -21,7 +21,7 @@ export class BirdsComponent implements OnInit {
     }
 
     onOpenDialogCreate() {
-        const dialogRef = this.dialog.open(BirdFormComponent, {
+        const dialogRef = this.dialog.open(CreationControlFormComponent, {
             data: { name: "Cadastrar" }
         });
 
@@ -32,7 +32,7 @@ export class BirdsComponent implements OnInit {
 
     onOpenDialogEdit(bird) {
         console.log("EDIT", bird);
-        const dialogRef = this.dialog.open(BirdFormComponent, {
+        const dialogRef = this.dialog.open(CreationControlFormComponent, {
             data: { name: "Editar", bird }
         });
 

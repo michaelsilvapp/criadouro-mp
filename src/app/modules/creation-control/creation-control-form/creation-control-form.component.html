@@ -1,0 +1,265 @@
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-success">
+                    <h4 class="card-title">{{ data.name }} Postura</h4>
+                    <!-- <p class="card-category">Adicione </p> -->
+                </div>
+                <div class="card-body">
+                    <form (submit)="onSave()">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input
+                                        type="number"
+                                        matInput
+                                        [(ngModel)]="document.birdCage"
+                                        name="birdCage"
+                                        placeholder="Gaiola Nº"
+                                    />
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Ano da Temporada: </mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.year"
+                                        name="year"
+                                    >
+                                        <mat-option
+                                            *ngFor="let year of years"
+                                            [value]="year"
+                                            >{{ year }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-label>Mês</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.month"
+                                        name="month"
+                                    >
+                                        <mat-option
+                                            *ngFor="let month of months"
+                                            [value]="month"
+                                            >{{ month }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-label>Postura</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.posture"
+                                        name="posture"
+                                    >
+                                        <mat-option
+                                            *ngFor="let posture of postures"
+                                            [value]="posture"
+                                            >{{ posture }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Macho</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.male"
+                                        name="male"
+                                    >
+                                        <mat-option
+                                            *ngFor="let male of birdsMales"
+                                            [value]="male"
+                                            >{{ male.creator.code }}:{{
+                                                male.year
+                                            }}:{{ male.washer }} -
+                                            {{ male.phenotype1 }}
+                                            {{ male.phenotype2 }}
+                                            {{ male.phenotype3 }}
+                                            {{ male.phenotype4 }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Fêmea</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.male"
+                                        name="male"
+                                    >
+                                        <mat-option
+                                            *ngFor="let female of birdsFemale"
+                                            [value]="female"
+                                            >{{ female.creator.code }}:{{
+                                                female.year
+                                            }}:{{ female.washer }} -
+                                            {{ female.phenotype1 }}
+                                            {{ female.phenotype2 }}
+                                            {{ female.phenotype3 }}
+                                            {{ female.phenotype4 }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <input
+                                        type="number"
+                                        matInput
+                                        [(ngModel)]="document.totalEggs"
+                                        name="totalEggs"
+                                        placeholder="Nº de ovos"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Data do inicio Choco</mat-label>
+                                    <input matInput [matDatepicker]="picker" />
+                                    <mat-datepicker-toggle
+                                        matSuffix
+                                        [for]="picker"
+                                    ></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label
+                                        >Data prevista do Nascimento</mat-label
+                                    >
+                                    <input matInput [matDatepicker]="picker" />
+                                    <mat-datepicker-toggle
+                                        matSuffix
+                                        [for]="picker"
+                                    ></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <input
+                                        type="number"
+                                        matInput
+                                        [(ngModel)]="document.totalPuppies"
+                                        name="totalPuppies"
+                                        placeholder="Nº de filhotes"
+                                    />
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label
+                                        >Data prevista para anilhar</mat-label
+                                    >
+                                    <input matInput [matDatepicker]="picker" />
+                                    <mat-datepicker-toggle
+                                        matSuffix
+                                        [for]="picker"
+                                    ></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label
+                                        >Data prevista para separar</mat-label
+                                    >
+                                    <input matInput [matDatepicker]="picker" />
+                                    <mat-datepicker-toggle
+                                        matSuffix
+                                        [for]="picker"
+                                    ></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <hr />
+
+                        <div
+                            class="row"
+                            *ngFor="
+                                let numberOfPuppie of [
+                                    '1',
+                                    '2',
+                                    '3',
+                                    '4',
+                                    '5',
+                                    '6'
+                                ]
+                            "
+                        >
+                            <div class="col-md-2">
+                                <mat-form-field class="example-full-width">
+                                    <input
+                                        type="number"
+                                        matInput
+                                        [(ngModel)]="
+                                            document.numberWasher[
+                                                numberOfPuppie
+                                            ]
+                                        "
+                                        name="numberWasher"
+                                        placeholder="Nº da anilha"
+                                    />
+                                </mat-form-field>
+                            </div>
+
+                            <div
+                                class="col-md-2"
+                                *ngFor="let genotype of ['1', '2', '3', '4']"
+                            >
+                                <mat-form-field>
+                                    <mat-label
+                                        >Genotipo {{ genotype }}
+                                    </mat-label>
+                                    <mat-select
+                                        [(ngModel)]="
+                                            document.genotype[numberOfPuppie][
+                                                genotype
+                                            ]
+                                        "
+                                        name="genotype1"
+                                    >
+                                        <mat-option
+                                            *ngFor="let mutation of mutations"
+                                            [value]="mutation.name"
+                                            >{{ mutation.name }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button type="submit" class="btn btn-success pull-right">
+        Salvar
+    </button>
+</mat-dialog-actions>

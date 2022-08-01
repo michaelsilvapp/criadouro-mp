@@ -12,7 +12,7 @@ import { MapsComponent } from "../../maps/maps.component";
 import { NotificationsComponent } from "../../notifications/notifications.component";
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
-import { MatRippleModule } from "@angular/material/core";
+import { MatRippleModule, MatNativeDateModule } from "@angular/material/core";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatSelectModule } from "@angular/material/select";
@@ -20,10 +20,14 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatDialogModule } from "@angular/material/dialog";
 
+import { MatDatepickerModule } from "@angular/material/datepicker";
+
 //COMPONENT
 import { BirdsComponent } from "../../modules/birds/birds.component";
 import { BirdFormComponent } from "../../modules/birds/birds-form/birds-form.component";
 
+import { CreationControlComponent } from "../../modules/creation-control/creation-control.component";
+import { CreationControlFormComponent } from "../../modules/creation-control/creation-control-form/creation-control-form.component";
 //SERVICE
 import { CreatoresServices } from "../../services/creators/creators.services";
 import { MutationsServices } from "../../services/mutations/mutations.service";
@@ -42,7 +46,9 @@ import { BirdsService } from "../../services/birds/birds.service";
         MatSelectModule,
         MatTooltipModule,
         MatMenuModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ],
     declarations: [
         DashboardComponent,
@@ -54,7 +60,9 @@ import { BirdsService } from "../../services/birds/birds.service";
         NotificationsComponent,
 
         BirdsComponent,
-        BirdFormComponent
+        BirdFormComponent,
+        CreationControlComponent,
+        CreationControlFormComponent
     ],
     providers: [CreatoresServices, MutationsServices, BirdsService]
 })

@@ -1,0 +1,107 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <button
+            class="btn btn-success btn-round"
+            mat-button
+            (click)="onOpenDialogCreate()"
+        >
+            + Novo
+        </button>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title">Forpus</h4>
+                        <p class="card-category">Aves do Plantel</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="text-success">
+                                    <th class="text-left">Anilha</th>
+                                    <th class="text-left">Ano</th>
+                                    <th class="text-left">Criador</th>
+                                    <th class="text-left">Linha</th>
+                                    <th class="text-left">Fenótipo</th>
+                                    <th class="text-left">Genótipo</th>
+                                    <th class="text-left">Sexo</th>
+                                    <th class="text-left">Peso</th>
+                                    <th class="text-left">Ações</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let birdItem of birdsList">
+                                        <td class="text-left">
+                                            {{ birdItem.washer }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ birdItem.year }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ birdItem.creator.name }}:
+                                            {{ birdItem.creator.code }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ birdItem.lineage }}
+                                        </td>
+
+                                        <td class="text-left">
+                                            {{ birdItem.phenotype1 }}
+                                            {{ birdItem.phenotype2 }}
+                                            {{ birdItem.phenotype3 }}
+                                            {{ birdItem.phenotype4 }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ birdItem.genotype1 }}
+                                            {{ birdItem.genotype2 }}
+                                            {{ birdItem.genotype3 }}
+                                            {{ birdItem.genotype4 }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ birdItem.gander }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ birdItem.weight }}g
+                                        </td>
+
+                                        <!-- <td class="text-primary">$36,738</td> -->
+                                        <td class="td-actions text-left">
+                                            <button
+                                                mat-raised-button
+                                                type="button"
+                                                matTooltip="Editar"
+                                                (click)="
+                                                    onOpenDialogEdit(birdItem)
+                                                "
+                                                [matTooltipPosition]="'above'"
+                                                class="btn btn-primary btn-link btn-sm btn-just-icon"
+                                            >
+                                                <i class="material-icons"
+                                                    >edit</i
+                                                >
+                                            </button>
+                                            <button
+                                                mat-raised-button
+                                                type="button"
+                                                matTooltip="Remove"
+                                                [matTooltipPosition]="'above'"
+                                                (click)="
+                                                    onOpenDialogEdit(birdItem)
+                                                "
+                                                class="btn btn-danger btn-link btn-sm btn-just-icon"
+                                            >
+                                                <i class="material-icons"
+                                                    >close</i
+                                                >
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
