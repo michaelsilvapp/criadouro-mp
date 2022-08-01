@@ -78,13 +78,10 @@
                                         <mat-option
                                             *ngFor="let male of birdsMales"
                                             [value]="male"
-                                            >{{ male.creator.code }}:{{
-                                                male.year
-                                            }}:{{ male.washer }} -
-                                            {{ male.phenotype1 }}
-                                            {{ male.phenotype2 }}
-                                            {{ male.phenotype3 }}
-                                            {{ male.phenotype4 }}
+                                        >
+                                            {{ male.code }} -
+                                            {{ male.phenotype }} /
+                                            {{ male.genotype }}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -100,13 +97,10 @@
                                         <mat-option
                                             *ngFor="let female of birdsFemale"
                                             [value]="female"
-                                            >{{ female.creator.code }}:{{
-                                                female.year
-                                            }}:{{ female.washer }} -
-                                            {{ female.phenotype1 }}
-                                            {{ female.phenotype2 }}
-                                            {{ female.phenotype3 }}
-                                            {{ female.phenotype4 }}
+                                        >
+                                            {{ female.code }}
+                                            {{ female.phenotype }} /
+                                            {{ female.genotype }}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -241,7 +235,7 @@
                             >
                                 <mat-form-field>
                                     <mat-label
-                                        >Genotipo {{ numberGenotype }}
+                                        >Fenótipo {{ numberGenotype }}
                                     </mat-label>
                                     <mat-select
                                         [(ngModel)]="

@@ -1,9 +1,10 @@
+import _ from "lodash";
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreatoresServices } from "../../../services/creators/creators.services";
 import { BirdsService } from "../../../services/birds/birds.service";
 import { MutationsServices } from "../../../services/mutations/mutations.service";
-
+import { FormGroup } from "@angular/forms";
 export interface DialogData {
     name: string;
     bird?: any;
@@ -52,13 +53,9 @@ export class CreationControlFormComponent implements OnInit {
             { numberWasher: "", gander: "", genotype: [] }
         ];
 
-        this.birdsFemale = await (
-            await this.birdsService.get({})
-        ).filter((b) => b.gander == "Fêmea");
+        this.birdsFemale = await this._getBirdByGander("Fêmea");
 
-        this.birdsMales = (await this.birdsService.get({})).filter(
-            (b) => b.gander == "Macho"
-        );
+        this.birdsMales = await this._getBirdByGander("Macho");
 
         console.log(this.birdsMales);
 
@@ -97,8 +94,30 @@ export class CreationControlFormComponent implements OnInit {
         ];
     }
 
+    private async _getBirdByGander(gander: string) {
+        const result = await this.birdsService.get({});
+
+        return result
+            .filter((b) => b.gander == gander)
+            .map((b) => {
+                const _getProps = (prop, separator = " ") => {
+                    const r = [1, 2, 3, 4].map((i) => _.get(b, `${prop}${i}`));
+
+                    return r.filter((r) => r).join(separator);
+                };
+
+                return {
+                    _id: b._id,
+                    gander: b.gander,
+                    code: `${b.creator.code}-${b.year}-${b.washer}`,
+                    phenotype: _getProps("phenotype"),
+                    genotype: _getProps("genotype", ", ")
+                };
+            });
+    }
+
     // displayFn(bird: any): string {
-    //     return bird && bird.name ? bird.name : "";
+    //     return bird && bird.name ? bird.name : "";s
     // }
 
     // private _filter(name: string): any[] {
@@ -110,8 +129,46 @@ export class CreationControlFormComponent implements OnInit {
     // }
 
     async onSave() {
-        console.log(this.document);
+        console.log(JSON.stringify(this.document));
 
+        const a = {
+            birdsPuppie: [
+                {
+                    numberWasher: 5,
+                    gander: "Macho",
+                    genotype: ["Verde", "Americano", "Fulvo"]
+                },
+                {
+                    numberWasher: 6,
+                    gander: "Fêmea",
+                    genotype: ["Verde", "Fulvo"]
+                },
+                { numberWasher: "", gander: "", genotype: [] },
+                { numberWasher: "", gander: "", genotype: [] },
+                { numberWasher: "", gander: "", genotype: [] },
+                { numberWasher: "", gander: "", genotype: [] }
+            ],
+            birdCage: 1,
+            year: 2022,
+            month: "Agosto",
+            posture: "1ª Postura",
+            male: {
+                _id: "fdsjfasjfsadklfdjsaflsakd",
+                gander: "Macho",
+                code: "OT-305-2018-18",
+                phenotype: "Jade Fulvo",
+                genotype: "Americano, Azul"
+            },
+            female: {
+                _id: "fdsajklr32u23fkdajklfff",
+                gander: "Fêmea",
+                code: "OT-128-2021-20",
+                phenotype: "Lutino",
+                genotype: "Azul"
+            },
+            totalEggs: 4,
+            totalPuppies: 1
+        };
         // await this.birdsService
         //     .insert({
         //         washer: "18",
