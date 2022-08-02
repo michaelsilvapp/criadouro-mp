@@ -40,6 +40,8 @@ import { CreationControlService } from "../../services/creation-control/creation
 import { AuthService } from "../../services/auth/auth.service";
 
 import { OktaAuth } from "@okta/okta-auth-js";
+import { IMaskModule } from "angular-imask";
+
 @NgModule({
     imports: [
         CommonModule,
@@ -57,7 +59,8 @@ import { OktaAuth } from "@okta/okta-auth-js";
         MatAutocompleteModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatCardModule
+        MatCardModule,
+        IMaskModule
     ],
     declarations: [
         DashboardComponent,

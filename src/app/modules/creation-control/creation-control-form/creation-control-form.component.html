@@ -23,13 +23,15 @@
 
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                    <mat-label>Ano da Temporada: </mat-label>
+                                    <mat-label>Ano: </mat-label>
                                     <mat-select
                                         [(ngModel)]="document.year"
                                         name="year"
                                     >
                                         <mat-option
-                                            *ngFor="let year of years"
+                                            *ngFor="
+                                                let year of ['2022', '2023']
+                                            "
                                             [value]="year"
                                             >{{ year }}</mat-option
                                         >
@@ -121,27 +123,29 @@
                             </div>
                             <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
-                                    <mat-label>Data do inicio Choco</mat-label>
-                                    <input matInput [matDatepicker]="picker" />
-                                    <mat-datepicker-toggle
-                                        matSuffix
-                                        [for]="picker"
-                                    ></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
+                                    <input
+                                        type="text"
+                                        matInput
+                                        name="dateStartPosture"
+                                        [(ngModel)]="document.dateStartPosture"
+                                        placeholder="Data do inicio Choco"
+                                        (focusout)="
+                                            onSetDateSum($event.target.value)
+                                        "
+                                        [imask]="{ mask: '00/00/0000' }"
+                                    />
                                 </mat-form-field>
                             </div>
 
                             <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
-                                    <mat-label
-                                        >Data prevista do Nascimento</mat-label
-                                    >
-                                    <input matInput [matDatepicker]="picker" />
-                                    <mat-datepicker-toggle
-                                        matSuffix
-                                        [for]="picker"
-                                    ></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
+                                    <input
+                                        type="text"
+                                        matInput
+                                        name="dateExpectedBirth"
+                                        [(ngModel)]="document.dateExpectedBirth"
+                                        placeholder="Data prevista do Nascimento"
+                                    />
                                 </mat-form-field>
                             </div>
                         </div>
@@ -161,29 +165,27 @@
 
                             <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
-                                    <mat-label
-                                        >Data prevista para anilhar</mat-label
-                                    >
-                                    <input matInput [matDatepicker]="picker" />
-                                    <mat-datepicker-toggle
-                                        matSuffix
-                                        [for]="picker"
-                                    ></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
+                                    <input
+                                        type="text"
+                                        matInput
+                                        name="dateExpectedRing"
+                                        [(ngModel)]="document.dateExpectedRing"
+                                        placeholder="Data prevista para anilhar"
+                                    />
                                 </mat-form-field>
                             </div>
 
                             <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
-                                    <mat-label
-                                        >Data prevista para separar</mat-label
-                                    >
-                                    <input matInput [matDatepicker]="picker" />
-                                    <mat-datepicker-toggle
-                                        matSuffix
-                                        [for]="picker"
-                                    ></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
+                                    <input
+                                        type="text"
+                                        matInput
+                                        name="dateExpectedSeparate"
+                                        [(ngModel)]="
+                                            document.dateExpectedSeparate
+                                        "
+                                        placeholder="Data prevista para separar"
+                                    />
                                 </mat-form-field>
                             </div>
                         </div>

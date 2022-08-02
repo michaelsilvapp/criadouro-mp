@@ -4,7 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreatoresServices } from "../../../services/creators/creators.services";
 import { BirdsService } from "../../../services/birds/birds.service";
 import { MutationsServices } from "../../../services/mutations/mutations.service";
-import { FormGroup } from "@angular/forms";
+import IMask from "imask";
+
 export interface DialogData {
     name: string;
     bird?: any;
@@ -32,6 +33,8 @@ export class CreationControlFormComponent implements OnInit {
     public birdsMales: any;
 
     public BirdSerices: BirdsService;
+
+    public dateMask = { mask: IMask.MaskedDate };
 
     constructor(
         public dialogRef: MatDialogRef<CreationControlFormComponent>,
@@ -63,10 +66,6 @@ export class CreationControlFormComponent implements OnInit {
 
         this.ganders = ["Macho", "Fêmea", "Desconhecido"];
 
-        this.lineages = ["Verde", "Azul", "Turquesa"];
-
-        this.years = [2022, 2023, 2024, 2025];
-
         this.months = [
             "Janeiro",
             "Fevereiro",
@@ -92,6 +91,36 @@ export class CreationControlFormComponent implements OnInit {
         ];
     }
 
+    public onSetDateSum(date) {
+        const _formatTo = (date) => {
+            const dateSplit = date.split("/");
+
+            console.log(dateSplit);
+            return `${dateSplit[1]}/${dateSplit[0]}/${dateSplit[2]}`;
+        };
+
+        const _geDate = (date, days) => {
+            const result = new Date(_formatTo(date));
+            result.setDate(result.getDate() + days);
+
+            return result.toLocaleDateString();
+        };
+
+        if (date.length == 10) {
+            this.document.dateExpectedBirth = _geDate(date, 21);
+
+            this.document.dateExpectedRing = _geDate(
+                this.document.dateExpectedBirth,
+                11
+            );
+
+            this.document.dateExpectedSeparate = _geDate(
+                this.document.dateExpectedRing,
+                15
+            );
+        }
+    }
+
     private async _getBirdByGander(gander: string) {
         const result = await this.birdsService.get({});
 
@@ -114,74 +143,9 @@ export class CreationControlFormComponent implements OnInit {
             });
     }
 
-    // displayFn(bird: any): string {
-    //     return bird && bird.name ? bird.name : "";s
-    // }
-
-    // private _filter(name: string): any[] {
-    //     const filterValue = name.toLowerCase();
-
-    //     return this.birdsMales.filter((option) =>
-    //         option.name.toLowerCase().includes(filterValue)
-    //     );
-    // }
-
     async onSave() {
-        console.log(JSON.stringify(this.document));
+        console.log(this.document);
 
-        const a = {
-            birdsPuppie: [
-                {
-                    numberWasher: 5,
-                    gander: "Macho",
-                    genotype: ["Verde", "Americano", "Fulvo"]
-                },
-                {
-                    numberWasher: 6,
-                    gander: "Fêmea",
-                    genotype: ["Verde", "Fulvo"]
-                },
-                { numberWasher: "", gander: "", genotype: [] },
-                { numberWasher: "", gander: "", genotype: [] },
-                { numberWasher: "", gander: "", genotype: [] },
-                { numberWasher: "", gander: "", genotype: [] }
-            ],
-            birdCage: 1,
-            year: 2022,
-            month: "Agosto",
-            posture: "1ª Postura",
-            male: {
-                _id: "fdsjfasjfsadklfdjsaflsakd",
-                gander: "Macho",
-                code: "OT-305-2018-18",
-                phenotype: "Jade Fulvo",
-                genotype: "Americano, Azul"
-            },
-            female: {
-                _id: "fdsajklr32u23fkdajklfff",
-                gander: "Fêmea",
-                code: "OT-128-2021-20",
-                phenotype: "Lutino",
-                genotype: "Azul"
-            },
-            totalEggs: 4,
-            totalPuppies: 1
-        };
-        // await this.birdsService
-        //     .insert({
-        //         washer: "18",
-        //         year: "2018",
-        //         creator: { name: "Kiko", code: "OT-305" },
-        //         gander: "Macho",
-        //         weight: "40,5",
-        //         lineage: "Verde",
-        //         phenotype1: "Jade",
-        //         phenotype2: "Fulvo",
-        //         genotype1: { name: "Americano" },
-        //         genotype2: { name: "Azul" }
-        //     })
-        //     .subscribe((data) => {
-        //         console.log(data);
-        //     });
+        this.dialogRef.close({ ...this.document });
     }
 }

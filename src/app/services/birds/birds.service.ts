@@ -6,14 +6,9 @@ import { Observable } from "rxjs";
 @Injectable({ providedIn: "root" })
 export class BirdsService {
     public baseURL: string =
-        "https://wv3bbjeob6.execute-api.us-east-1.amazonaws.com/";
+        "https://wv3bbjeob6.execute-api.us-east-1.amazonaws.com";
 
     constructor(public http: HttpClient) {}
-
-    // getPeople(): Observable<Person[]> {
-    //     console.log("getPeople " + this.baseURL + "people");
-    //     return this.http.get<Person[]>(this.baseURL + "people");
-    // }
 
     async insert(params: any) {
         const headers = new Headers({
@@ -32,7 +27,7 @@ export class BirdsService {
             .post(`${this.baseURL}/get-birds`, body)
             .toPromise();
 
-        return _.get(result, "result");
+        return _.get(result, "result", []);
 
         // const list = [
         //     {
