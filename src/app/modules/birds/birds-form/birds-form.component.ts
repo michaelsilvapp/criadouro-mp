@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreatoresServices } from "../../../services/creators/creators.services";
@@ -26,9 +27,7 @@ export class BirdFormComponent implements OnInit {
         public dialogRef: MatDialogRef<BirdFormComponent>,
         @Inject(MAT_DIALOG_DATA) public data: DialogData,
         private birdsService: BirdsService
-    ) {
-        console.log(this.data);
-    }
+    ) {}
 
     ngOnInit(): void {
         if (this.data.bird) {
@@ -45,21 +44,10 @@ export class BirdFormComponent implements OnInit {
     }
 
     async onSave() {
-        console.log(this.birdsService);
+        const r = await this.birdsService.insert(this.document);
 
-        const r = await this.birdsService.insert({
-            washer: "18",
-            year: "2018",
-            creator: { name: "Kiko", code: "OT-305" },
-            gander: "Macho",
-            weight: "40,5",
-            lineage: "Verde",
-            phenotype1: "Jade",
-            phenotype2: "Fulvo",
-            genotype1: "Americano",
-            genotype2: "Azul"
-        });
+        console.log("RESPONSE", _.get(r, "result"));
 
-        console.log("response", r);
+        this.dialogRef.close({ _id: _.get(r, "result"), ...this.document });
     }
 }

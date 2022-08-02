@@ -28,8 +28,8 @@ export class CreationControlFormComponent implements OnInit {
 
     public document: any = {};
 
-    public birdsFemale: any[];
-    public birdsMales: any[];
+    public birdsFemale: any;
+    public birdsMales: any;
 
     public BirdSerices: BirdsService;
 
@@ -56,8 +56,6 @@ export class CreationControlFormComponent implements OnInit {
         this.birdsFemale = await this._getBirdByGander("Fêmea");
 
         this.birdsMales = await this._getBirdByGander("Macho");
-
-        console.log(this.birdsMales);
 
         this.numberOfPuppies = [1, 2, 3, 4, 5, 6];
 

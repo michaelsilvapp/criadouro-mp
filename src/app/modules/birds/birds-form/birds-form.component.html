@@ -9,7 +9,29 @@
                 <div class="card-body">
                     <form (submit)="onSave()">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-label>Status</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.status"
+                                        name="status"
+                                    >
+                                        <mat-option
+                                            *ngFor="
+                                                let status of [
+                                                    'ATIVO',
+                                                    'VENDIDO',
+                                                    'BAIXA'
+                                                ]
+                                            "
+                                            [value]="status"
+                                            >{{ status }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
                                     <input
                                         matInput
@@ -29,7 +51,7 @@
                                     />
                                 </mat-form-field>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <mat-form-field>
                                     <mat-label>Criador</mat-label>
                                     <mat-select
@@ -39,8 +61,9 @@
                                         <mat-option
                                             *ngFor="let creator of creators"
                                             [value]="creator"
-                                            >{{ creator.name }}</mat-option
-                                        >
+                                            >{{ creator.name }}:
+                                            {{ creator.code }}
+                                        </mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>

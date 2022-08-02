@@ -20,7 +20,7 @@ export class BirdsComponent implements OnInit, OnDestroy {
         this.birdsService = birdsService;
     }
 
-    public birdsList: any[];
+    public birdsList: any;
     public isAuthenticated = false;
     private _destroySub$ = new Subject<void>();
 
@@ -33,6 +33,8 @@ export class BirdsComponent implements OnInit, OnDestroy {
             });
 
         this.birdsList = await this.birdsService.get({});
+
+        console.log("this.birdsList", this.birdsList);
     }
 
     public ngOnDestroy(): void {
@@ -52,7 +54,7 @@ export class BirdsComponent implements OnInit, OnDestroy {
         });
 
         dialogRef.afterClosed().subscribe((result) => {
-            console.log(`Dialog result: ${result}`);
+            console.log(`Dialog result:`, result);
         });
     }
 
