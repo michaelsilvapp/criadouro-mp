@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 @Injectable({ providedIn: "root" })
 export class BirdsService {
     public baseURL: string =
-        "https://wv3bbjeob6.execute-api.us-east-1.amazonaws.com";
+        "https://wv3bbjeob6.execute-api.us-east-1.amazonaws.com/dev";
 
     constructor(public http: HttpClient) {}
 
@@ -14,16 +14,35 @@ export class BirdsService {
     //     return this.http.get<Person[]>(this.baseURL + "people");
     // }
 
-    insert(bird: any): Observable<any> {
-        const headers = {
-            "content-type": "application/json",
-            "x-api-key": "d37DXdpSIb9B3xT9wHi4N5do6145zcxk9P42zixM",
-            "Access-Control-Allow-Origin": "*"
-        };
+    async insert(params: any) {
+        // const headers = {
+        //     "content-type": "application/json",
+        //     "Access-Control-Allow-Origin": "*"
+        // };
 
-        return this.http.post(`${this.baseURL}/insert-bird`, bird, {
-            headers: headers
+        // return this.http.post(`${this.baseURL}/insert-bird`, bird, {
+        //     headers: headers
+        // });
+
+        //   async call(endpoint, params = {}) {
+        // const headers = new Headers({
+        //     "Content-Type": "application/json",
+
+        //     "x-api-key": this.xApiKey
+        // });
+
+        const headers = new Headers({
+            "Content-Type": "application/json"
         });
+
+        const body = JSON.stringify(params);
+
+        return this.http
+            .post(
+                "https://wv3bbjeob6.execute-api.us-east-1.amazonaws.com/dev/insert-bird",
+                body
+            )
+            .toPromise();
     }
 
     async get(query: any) {

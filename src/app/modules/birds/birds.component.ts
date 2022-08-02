@@ -2,22 +2,45 @@ import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { BirdFormComponent } from "./birds-form/birds-form.component";
 import { BirdsService } from "../../services/birds/birds.service";
+
+import { Subject, take, takeUntil } from "rxjs";
+import { AuthService } from "../../services/auth/auth.service";
+
 @Component({
     selector: "birds",
     templateUrl: "./birds.component.html",
     styleUrls: ["./birds.component.css"]
 })
 export class BirdsComponent implements OnInit {
-    constructor(public dialog: MatDialog, private birdsService: BirdsService) {
+    constructor(
+        public dialog: MatDialog,
+        private birdsService: BirdsService,
+        private _authService: AuthService
+    ) {
         this.birdsService = birdsService;
     }
 
     public birdsList: any[];
+    public isAuthenticated = false;
+    private _destroySub$ = new Subject<void>();
 
     async ngOnInit() {
-        this.birdsList = await this.birdsService.get({});
+        this._authService.isAuthenticated$
+            .pipe(takeUntil(this._destroySub$))
+            .subscribe(
+                (isAuthenticated: boolean) =>
+                    (this.isAuthenticated = isAuthenticated)
+            );
 
-        console.log("birdsList", this.birdsList);
+        this.birdsList = await this.birdsService.get({});
+    }
+
+    public ngOnDestroy(): void {
+        this._destroySub$.next();
+    }
+
+    public logout(): void {
+        this._authService.logout("/").pipe(take(1));
     }
 
     onOpenDialogCreate() {

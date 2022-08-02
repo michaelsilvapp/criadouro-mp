@@ -47,21 +47,19 @@ export class BirdFormComponent implements OnInit {
     async onSave() {
         console.log(this.birdsService);
 
-        await this.birdsService
-            .insert({
-                washer: "18",
-                year: "2018",
-                creator: { name: "Kiko", code: "OT-305" },
-                gander: "Macho",
-                weight: "40,5",
-                lineage: "Verde",
-                phenotype1: "Jade",
-                phenotype2: "Fulvo",
-                genotype1: "Americano",
-                genotype2: "Azul"
-            })
-            .subscribe((data) => {
-                console.log("RETORNO", data);
-            });
+        const r = await this.birdsService.insert({
+            washer: "18",
+            year: "2018",
+            creator: { name: "Kiko", code: "OT-305" },
+            gander: "Macho",
+            weight: "40,5",
+            lineage: "Verde",
+            phenotype1: "Jade",
+            phenotype2: "Fulvo",
+            genotype1: "Americano",
+            genotype2: "Azul"
+        });
+
+        console.log("response", r);
     }
 }

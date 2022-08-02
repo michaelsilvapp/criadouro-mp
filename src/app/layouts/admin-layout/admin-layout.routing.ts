@@ -1,23 +1,20 @@
 import { Routes } from "@angular/router";
-
+import { AuthenticationComponent } from "app/modules/authentication/authentication.component";
 import { DashboardComponent } from "../../dashboard/dashboard.component";
-import { UserProfileComponent } from "../../user-profile/user-profile.component";
-import { TableListComponent } from "../../table-list/table-list.component";
-import { TypographyComponent } from "../../typography/typography.component";
-import { IconsComponent } from "../../icons/icons.component";
-import { MapsComponent } from "../../maps/maps.component";
-import { NotificationsComponent } from "../../notifications/notifications.component";
-
 import { BirdsComponent } from "../../modules/birds/birds.component";
 import { CreationControlComponent } from "../../modules/creation-control/creation-control.component";
+import { AuthGuard } from "../../modules/guard/auth.guard";
 export const AdminLayoutRoutes: Routes = [
-    { path: "dashboard", component: DashboardComponent },
-    // { path: "user-profile", component: UserProfileComponent },
-    // { path: "table-list", component: TableListComponent },
-    // { path: "typography", component: TypographyComponent },
-    // { path: "icons", component: IconsComponent },
-    // { path: "maps", component: MapsComponent },
-    // { path: "notifications", component: NotificationsComponent },
-    { path: "aves", component: BirdsComponent },
-    { path: "posturas", component: CreationControlComponent }
+    {
+        path: "dashboard",
+        component: DashboardComponent,
+        canActivate: [AuthGuard]
+    },
+    { path: "aves", component: BirdsComponent, canActivate: [AuthGuard] },
+    {
+        path: "posturas",
+        component: CreationControlComponent,
+        canActivate: [AuthGuard]
+    },
+    { path: "login", component: AuthenticationComponent }
 ];
