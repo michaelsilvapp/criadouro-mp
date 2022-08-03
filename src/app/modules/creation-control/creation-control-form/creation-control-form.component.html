@@ -77,6 +77,7 @@
                                     <mat-select
                                         [(ngModel)]="document.male"
                                         name="male"
+                                        [compareWith]="onSelectBy"
                                     >
                                         <mat-option
                                             *ngFor="let male of birdsMales"
@@ -100,6 +101,7 @@
                                         <mat-option
                                             *ngFor="let female of birdsFemale"
                                             [value]="female"
+                                            [compareWith]="onSelectBy"
                                         >
                                             {{ female.code }}
                                             {{ female.phenotype }} /

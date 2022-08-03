@@ -9,7 +9,7 @@ import IMask from "imask";
 
 export interface DialogData {
     name: string;
-    bird?: any;
+    posture?: any;
 }
 
 @Component({
@@ -46,18 +46,19 @@ export class CreationControlFormComponent implements OnInit {
     ) {}
 
     async ngOnInit() {
-        if (this.data.bird) {
-            this.document = this.data.bird;
+        if (this.data.posture) {
+            this.document = this.data.posture;
+            console.log("this.document", this.document);
+        } else {
+            this.document.birdsPuppie = [
+                { numberWasher: "", gander: "", genotype: [] },
+                { numberWasher: "", gander: "", genotype: [] },
+                { numberWasher: "", gander: "", genotype: [] },
+                { numberWasher: "", gander: "", genotype: [] },
+                { numberWasher: "", gander: "", genotype: [] },
+                { numberWasher: "", gander: "", genotype: [] }
+            ];
         }
-
-        this.document.birdsPuppie = [
-            { numberWasher: "", gander: "", genotype: [] },
-            { numberWasher: "", gander: "", genotype: [] },
-            { numberWasher: "", gander: "", genotype: [] },
-            { numberWasher: "", gander: "", genotype: [] },
-            { numberWasher: "", gander: "", genotype: [] },
-            { numberWasher: "", gander: "", genotype: [] }
-        ];
 
         this.birdsFemale = await this._getBirdByGander("Fêmea");
 
@@ -152,5 +153,9 @@ export class CreationControlFormComponent implements OnInit {
         console.log("RESPONSE", _.get(r, "result"));
 
         this.dialogRef.close({ _id: _.get(r, "result"), ...this.document });
+    }
+
+    public onSelectBy(option, value): boolean {
+        return option.code === value.code;
     }
 }

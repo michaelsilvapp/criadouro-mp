@@ -62,9 +62,9 @@ export class CreationControlComponent implements OnInit, OnDestroy {
         });
     }
 
-    onOpenDialogEdit(bird) {
+    onOpenDialogEdit(posture) {
         const dialogRef = this.dialog.open(CreationControlFormComponent, {
-            data: { name: "Editar", bird }
+            data: { name: "Editar", posture }
         });
 
         dialogRef.afterClosed().subscribe((result) => {
