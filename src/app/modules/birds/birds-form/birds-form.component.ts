@@ -43,6 +43,10 @@ export class BirdFormComponent implements OnInit {
         this.mutations = new MutationsServices().getList();
     }
 
+    public objectComparisonFunction = function (option, value): boolean {
+        return option.code === value.code;
+    };
+
     async onSave() {
         const r = await this.birdsService.insert(this.document);
 

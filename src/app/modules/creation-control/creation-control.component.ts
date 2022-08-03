@@ -38,12 +38,18 @@ export class CreationControlComponent implements OnInit, OnDestroy {
                 return (this.isAuthenticated = isAuthenticated);
             });
 
-        this.creationControlList = await this.creationControlService.get({});
-
-        console.log("creationControlList", this.creationControlList);
-
         this.year = 2022;
         this.years = [2022, 2023, 2024, 2025];
+
+        this.creationControlList = await this.list(this.year);
+    }
+
+    async list(year) {
+        let list = await this.creationControlService.get({});
+
+        list = list.filter((l) => parseInt(l.year) == year);
+
+        return list;
     }
 
     onOpenDialogCreate() {
@@ -57,7 +63,6 @@ export class CreationControlComponent implements OnInit, OnDestroy {
     }
 
     onOpenDialogEdit(bird) {
-        console.log("EDIT", bird);
         const dialogRef = this.dialog.open(CreationControlFormComponent, {
             data: { name: "Editar", bird }
         });

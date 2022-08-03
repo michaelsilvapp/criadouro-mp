@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreatoresServices } from "../../../services/creators/creators.services";
 import { BirdsService } from "../../../services/birds/birds.service";
 import { MutationsServices } from "../../../services/mutations/mutations.service";
+import { CreationControlService } from "../../../services/creation-control/creation-control.service";
 import IMask from "imask";
 
 export interface DialogData {
@@ -33,13 +34,15 @@ export class CreationControlFormComponent implements OnInit {
     public birdsMales: any;
 
     public BirdSerices: BirdsService;
+    public CreationControlService: CreationControlService;
 
     public dateMask = { mask: IMask.MaskedDate };
 
     constructor(
         public dialogRef: MatDialogRef<CreationControlFormComponent>,
         @Inject(MAT_DIALOG_DATA) public data: DialogData,
-        private birdsService: BirdsService
+        private birdsService: BirdsService,
+        private creationControlService: CreationControlService
     ) {}
 
     async ngOnInit() {
@@ -144,8 +147,10 @@ export class CreationControlFormComponent implements OnInit {
     }
 
     async onSave() {
-        console.log(this.document);
+        const r = await this.creationControlService.insert(this.document);
 
-        this.dialogRef.close({ ...this.document });
+        console.log("RESPONSE", _.get(r, "result"));
+
+        this.dialogRef.close({ _id: _.get(r, "result"), ...this.document });
     }
 }
