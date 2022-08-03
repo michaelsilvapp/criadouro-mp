@@ -1,44 +1,47 @@
 <div class="main-content">
-    <div class="container-fluid">
-        <mat-card>
-            <mat-card-content>
-                <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
-                    <h2>Log In</h2>
-                    <mat-error *ngIf="!loginValid">
-                        The username and password were not recognized
-                    </mat-error>
-                    <mat-form-field class="example-full-width">
-                        <input
-                            matInput
-                            placeholder="Email"
-                            [(ngModel)]="document.username"
-                            name="username"
-                            required
-                        />
-                        <mat-error>
-                            Please provide a valid email address
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header card-header-success">
+                    <h4 class="card-title">Login</h4>
+                    <!-- <p class="card-category">Adicione </p> -->
+                </div>
+                <div class="card-body">
+                    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+                        <mat-error *ngIf="!loginValid">
+                            Confira se seu E-mail e Senha estão corretos e tente
+                            novamente.
                         </mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width">
-                        <input
-                            matInput
-                            type="password"
-                            placeholder="Password"
-                            [(ngModel)]="document.password"
-                            name="password"
-                            required
-                        />
-                        <mat-error> Please provide a valid password </mat-error>
-                    </mat-form-field>
-                    <button
-                        mat-raised-button
-                        color="primary"
-                        [disabled]="!loginForm.form.valid"
-                    >
-                        Login
-                    </button>
-                </form>
-            </mat-card-content>
-        </mat-card>
+                        <mat-form-field class="example-full-width">
+                            <input
+                                matInput
+                                placeholder="E-mail"
+                                [(ngModel)]="document.username"
+                                name="username"
+                                required
+                            />
+                            <mat-error> Informe um email valido </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <input
+                                matInput
+                                type="password"
+                                placeholder="Senha"
+                                [(ngModel)]="document.password"
+                                name="password"
+                                required
+                            />
+                        </mat-form-field>
+                        <button
+                            mat-button
+                            class="btn btn-success pull-right"
+                            [disabled]="!loginForm.form.valid"
+                        >
+                            Entrar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
