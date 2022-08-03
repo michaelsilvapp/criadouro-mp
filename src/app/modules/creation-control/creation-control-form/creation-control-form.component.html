@@ -97,11 +97,11 @@
                                     <mat-select
                                         [(ngModel)]="document.female"
                                         name="female"
+                                        [compareWith]="onSelectBy"
                                     >
                                         <mat-option
                                             *ngFor="let female of birdsFemale"
                                             [value]="female"
-                                            [compareWith]="onSelectBy"
                                         >
                                             {{ female.code }}
                                             {{ female.phenotype }} /
@@ -196,10 +196,7 @@
 
                         <div
                             class="row"
-                            *ngFor="
-                                let numberOfPuppie of [0, 1, 2, 3, 4, 5];
-                                let index = i
-                            "
+                            *ngFor="let numberOfPuppie of [0, 1, 2, 3, 4, 5]"
                         >
                             <div class="col-md-2">
                                 <mat-form-field class="example-full-width">
