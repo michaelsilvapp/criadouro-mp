@@ -24,6 +24,7 @@ export class CreationControlComponent implements OnInit, OnDestroy {
 
     public isAuthenticated = false;
     private _destroySub$ = new Subject<void>();
+    public loading: boolean;
 
     public year: number;
     public years: number[];
@@ -31,6 +32,7 @@ export class CreationControlComponent implements OnInit, OnDestroy {
     public creationControlList: any[];
 
     async ngOnInit() {
+        this.loading = true;
         this._authService.isAuthenticated$
             .pipe(takeUntil(this._destroySub$))
             .subscribe((isAuthenticated: boolean) => {
@@ -42,6 +44,8 @@ export class CreationControlComponent implements OnInit, OnDestroy {
         this.years = [2022, 2023, 2024, 2025];
 
         this.creationControlList = await this.list(this.year);
+
+        this.loading = false;
     }
 
     async list(year) {

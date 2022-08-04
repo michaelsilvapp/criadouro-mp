@@ -196,7 +196,17 @@
 
                         <div
                             class="row"
-                            *ngFor="let numberOfPuppie of [0, 1, 2, 3, 4, 5]"
+                            *ngFor="
+                                let numberOfPuppie of [
+                                    '0',
+                                    '1',
+                                    '2',
+                                    '3',
+                                    '4',
+                                    '5'
+                                ];
+                                let index = index
+                            "
                         >
                             <div class="col-md-2">
                                 <mat-form-field class="example-full-width">
@@ -204,10 +214,10 @@
                                         type="number"
                                         matInput
                                         [(ngModel)]="
-                                            document.birdsPuppie[numberOfPuppie]
+                                            document.birdsPuppie[index]
                                                 .numberWasher
                                         "
-                                        name="numberWasher"
+                                        name="{{ 'numberWasher' + index }}"
                                         placeholder="Nº da anilha"
                                     />
                                 </mat-form-field>
@@ -217,10 +227,9 @@
                                     <mat-label>Sexo</mat-label>
                                     <mat-select
                                         [(ngModel)]="
-                                            document.birdsPuppie[numberOfPuppie]
-                                                .gander
+                                            document.birdsPuppie[index].gander
                                         "
-                                        name="gander"
+                                        name="{{ 'gander' + index }}"
                                     >
                                         <mat-option
                                             *ngFor="let gander of ganders"
@@ -233,7 +242,9 @@
 
                             <div
                                 class="col-md-2"
-                                *ngFor="let numberGenotype of [0, 1, 2, 3]"
+                                *ngFor="
+                                    let numberGenotype of ['0', '1', '2', '3']
+                                "
                             >
                                 <mat-form-field>
                                     <mat-label
@@ -241,9 +252,12 @@
                                     </mat-label>
                                     <mat-select
                                         [(ngModel)]="
-                                            document.birdsPuppie[numberOfPuppie]
+                                            document.birdsPuppie[index]
                                                 .genotype[numberGenotype]
                                         "
+                                        name="{{
+                                            'genotype' + index + numberGenotype
+                                        }}"
                                     >
                                         <mat-option
                                             *ngFor="let mutation of mutations"

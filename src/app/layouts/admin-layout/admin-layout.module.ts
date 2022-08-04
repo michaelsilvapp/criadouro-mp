@@ -16,6 +16,7 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatCardModule } from "@angular/material/card";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 //COMPONENT
 import { BirdsComponent } from "../../modules/birds/birds.component";
@@ -55,7 +56,8 @@ import { IMaskModule } from "angular-imask";
         MatDatepickerModule,
         MatNativeDateModule,
         MatCardModule,
-        IMaskModule
+        IMaskModule,
+        MatProgressBarModule
     ],
     declarations: [
         DashboardComponent,

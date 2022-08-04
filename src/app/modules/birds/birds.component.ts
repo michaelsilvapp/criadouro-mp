@@ -20,11 +20,14 @@ export class BirdsComponent implements OnInit, OnDestroy {
         this.birdsService = birdsService;
     }
 
+    public loading: boolean;
     public birdsList: any;
     public isAuthenticated = false;
     private _destroySub$ = new Subject<void>();
 
     async ngOnInit() {
+        this.loading = true;
+
         this._authService.isAuthenticated$
             .pipe(takeUntil(this._destroySub$))
             .subscribe((isAuthenticated: boolean) => {
@@ -34,7 +37,7 @@ export class BirdsComponent implements OnInit, OnDestroy {
 
         this.birdsList = await this.birdsService.get({});
 
-        console.log("this.birdsList", this.birdsList);
+        this.loading = false;
     }
 
     public ngOnDestroy(): void {
