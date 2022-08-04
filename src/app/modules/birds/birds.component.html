@@ -1,17 +1,21 @@
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 <div class="main-content">
-    <div class="container-fluid">
-        <button
-            class="btn btn-success"
-            mat-button
-            (click)="onOpenDialogCreate()"
-        >
-            Novo
-        </button>
+    <div class="container-fluid" id="MainContainer">
+        <div class="row" style="width: 100%">
+            <div class="col-md-2">
+                <button
+                    class="btn btn-success"
+                    mat-button
+                    (click)="onOpenDialogCreate()"
+                >
+                    Novo
+                </button>
+            </div>
+        </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
+        <div class="row" id="SubContainer">
+            <div class="col-md-12" id="BodyContainer">
+                <div class="card" id="CardContainer">
                     <div class="card-header card-header-success">
                         <h4 class="card-title">Forpus</h4>
                         <p class="card-category">Aves do Plantel</p>
@@ -20,18 +24,27 @@
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead class="text-success">
-                                    <th class="text-left">Anilha</th>
-                                    <th class="text-left">Ano</th>
-                                    <th class="text-left">Criador</th>
+                                    <th>#</th>
+                                    <th>Anilha</th>
+                                    <th>Ano</th>
+                                    <th>Criador</th>
 
-                                    <th class="text-left">Fenótipo</th>
-                                    <th class="text-left">Genótipo</th>
-                                    <th class="text-left">Sexo</th>
-                                    <th class="text-left">Peso</th>
-                                    <th class="text-left">Ações</th>
+                                    <th>Fenótipo</th>
+                                    <th>Genótipo</th>
+                                    <th>Sexo</th>
+                                    <th>Peso</th>
+                                    <th>Ações</th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let birdItem of birdsList">
+                                    <tr
+                                        *ngFor="
+                                            let birdItem of birdsList;
+                                            let index = index
+                                        "
+                                    >
+                                        <td class="text-left">
+                                            #{{ index + 1 }}
+                                        </td>
                                         <td class="text-left">
                                             {{ birdItem.washer }}
                                         </td>

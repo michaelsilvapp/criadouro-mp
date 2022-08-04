@@ -152,7 +152,10 @@ export class CreationControlFormComponent implements OnInit {
 
         console.log("RESPONSE", _.get(r, "result"));
 
-        this.dialogRef.close({ _id: _.get(r, "result"), ...this.document });
+        this.dialogRef.close({
+            _id: _.get(r, "result"),
+            ...this.document
+        });
     }
 
     public onSelectBy(option, value): boolean {

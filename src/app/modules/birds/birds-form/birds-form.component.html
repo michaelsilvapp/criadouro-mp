@@ -45,13 +45,29 @@
                             </div>
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                    <input
-                                        matInput
+                                    <mat-label>Ano: </mat-label>
+                                    <mat-select
                                         [(ngModel)]="document.year"
                                         name="year"
-                                        placeholder="Ano"
-                                        required
-                                    />
+                                    >
+                                        <mat-option
+                                            *ngFor="
+                                                let year of [
+                                                    '2015',
+                                                    '2016',
+                                                    '2017',
+                                                    '2018',
+                                                    '2019',
+                                                    '2020',
+                                                    '2021',
+                                                    '2022',
+                                                    '2023'
+                                                ]
+                                            "
+                                            [value]="year"
+                                            >{{ year }}</mat-option
+                                        >
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                             <div class="col-md-3">

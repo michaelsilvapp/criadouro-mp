@@ -36,7 +36,6 @@ export class CreationControlComponent implements OnInit, OnDestroy {
         this._authService.isAuthenticated$
             .pipe(takeUntil(this._destroySub$))
             .subscribe((isAuthenticated: boolean) => {
-                console.log("isAuthenticated", isAuthenticated);
                 return (this.isAuthenticated = isAuthenticated);
             });
 
@@ -62,7 +61,8 @@ export class CreationControlComponent implements OnInit, OnDestroy {
         });
 
         dialogRef.afterClosed().subscribe((result) => {
-            console.log(`Dialog result: `, result);
+            console.log("result");
+            if (result) this.creationControlList.push(result);
         });
     }
 

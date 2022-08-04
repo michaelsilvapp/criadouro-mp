@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { BirdFormComponent } from "./birds-form/birds-form.component";
@@ -35,19 +36,22 @@ export class BirdsComponent implements OnInit, OnDestroy {
                 return (this.isAuthenticated = isAuthenticated);
             });
 
-        this.birdsList = await this.birdsService.get({});
+        this.birdsList = await this.list();
 
         this.loading = false;
     }
 
     public ngOnDestroy(): void {
-        console.log("exec ngOnDestroy");
         this._destroySub$.next();
     }
 
-    public logout(): void {
-        console.log("exec logout");
+    async list() {
+        let list = await this.birdsService.get({});
 
+        return _.sortBy(list, ["year", "genotype1"]);
+    }
+
+    public logout(): void {
         this._authService.logout("/").pipe(take(1));
     }
 
@@ -57,12 +61,11 @@ export class BirdsComponent implements OnInit, OnDestroy {
         });
 
         dialogRef.afterClosed().subscribe((result) => {
-            console.log(`Dialog result:`, result);
+            if (result) this.birdsList.push(result);
         });
     }
 
     onOpenDialogEdit(bird) {
-        console.log("EDIT", bird);
         const dialogRef = this.dialog.open(BirdFormComponent, {
             data: { name: "Editar", bird }
         });
