@@ -25,12 +25,12 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit(): void {
-        // this._authService.isAuthenticated$
-        //     .pipe(
-        //         filter((isAuthenticated: boolean) => isAuthenticated),
-        //         takeUntil(this._destroySub$)
-        //     )
-        //     .subscribe((_) => this._router.navigateByUrl(this.returnUrl));
+        this._authService.isAuthenticated$
+            .pipe(
+                filter((isAuthenticated: boolean) => isAuthenticated),
+                takeUntil(this._destroySub$)
+            )
+            .subscribe((_) => this._router.navigateByUrl(this.returnUrl));
     }
 
     public ngOnDestroy(): void {

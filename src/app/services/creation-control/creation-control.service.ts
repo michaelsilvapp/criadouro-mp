@@ -30,4 +30,16 @@ export class CreationControlService {
 
         return _.get(result, "result");
     }
+
+    async schedules(params) {
+        const headers = new Headers({
+            "Content-Type": "application/json"
+        });
+
+        const body = JSON.stringify(params);
+
+        return this.http
+            .post(`${this.baseURL}/schedules-posture`, body)
+            .toPromise();
+    }
 }

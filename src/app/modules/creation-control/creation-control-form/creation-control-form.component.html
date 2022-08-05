@@ -1,5 +1,9 @@
 <form #loginForm="ngForm" (submit)="onSave()">
     <div mat-dialog-content>
+        <mat-progress-bar
+            *ngIf="loading"
+            mode="indeterminate"
+        ></mat-progress-bar>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -281,7 +285,7 @@
             mat-raised-button
             type="submit"
             class="btn btn-success pull-right"
-            [disabled]="!loginForm.form.valid"
+            [disabled]="!loginForm.form.valid || loading"
         >
             Salvar
         </button>

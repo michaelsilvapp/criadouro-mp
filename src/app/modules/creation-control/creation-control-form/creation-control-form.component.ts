@@ -37,6 +37,7 @@ export class CreationControlFormComponent implements OnInit {
     public CreationControlService: CreationControlService;
 
     public dateMask = { mask: IMask.MaskedDate };
+    public loading: boolean;
 
     constructor(
         public dialogRef: MatDialogRef<CreationControlFormComponent>,
@@ -46,6 +47,7 @@ export class CreationControlFormComponent implements OnInit {
     ) {}
 
     async ngOnInit() {
+        this.loading = true;
         if (this.data.posture) {
             this.document = this.data.posture;
             console.log("this.document", this.document);
@@ -93,6 +95,8 @@ export class CreationControlFormComponent implements OnInit {
             "3ª Postura",
             "4ª Postura"
         ];
+
+        this.loading = false;
     }
 
     public onSetDateSum(date) {
@@ -148,6 +152,8 @@ export class CreationControlFormComponent implements OnInit {
     }
 
     async onSave() {
+        this.loading = true;
+
         const r = await this.creationControlService.insert(this.document);
 
         console.log("RESPONSE", _.get(r, "result"));
@@ -156,6 +162,28 @@ export class CreationControlFormComponent implements OnInit {
             _id: _.get(r, "result"),
             ...this.document
         });
+
+        const _setEvent = async (date, resumo) => {
+            const dateArray = date.split("/");
+
+            await this.creationControlService.schedules({
+                year: parseInt(dateArray[2]),
+                month: parseInt(dateArray[1]),
+                day: parseInt(dateArray[0]),
+                title: `Gaiola Nº: ${this.document.birdCage} - ${resumo}: ${this.document.posture} `,
+                description: `Casal: (F) ${this.document.female.code} X (M) ${this.document.male.code}`
+            });
+        };
+
+        if (this.data.name == "Cadastrar") {
+            if (this.document.dateExpectedBirth)
+                await _setEvent(this.document.dateExpectedBirth, "Nascimento");
+
+            if (this.document.dateExpectedRing)
+                await _setEvent(this.document.dateExpectedRing, "Anilhamento");
+        }
+
+        this.loading = false;
     }
 
     public onSelectBy(option, value): boolean {
