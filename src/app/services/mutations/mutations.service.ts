@@ -5,6 +5,7 @@ import { Injectable } from "@angular/core";
 })
 export class MutationsServices {
     private mutationsList = [
+        { name: "" },
         { name: "Azul" },
         { name: "Verde" },
         { name: "Turquesa" },
@@ -14,14 +15,15 @@ export class MutationsServices {
         { name: "Jade" },
         { name: "Oliva" },
         { name: "Americano" },
-        { name: "Pastel tipo 1" },
-        { name: "Pastel tipo 2" },
+        { name: "Pastel Tipo 1" },
+        { name: "Pastel Tipo 2" },
         { name: "Fulvo" },
         { name: "Canela" },
         { name: "Cinza" },
         { name: "Albino" },
         { name: "Lutino" },
-        { name: "Cremino" }
+        { name: "Cremino" },
+        { name: "INO" }
     ];
 
     constructor() {}
