@@ -17,7 +17,8 @@ export class BirdFormComponent implements OnInit {
     public creators: any;
     public lineages: string[];
     public ganders: string[];
-    public mutations: any[];
+    public phenotypes: any[];
+    public genotypes: any[];
 
     public BirdSerices: BirdsService;
 
@@ -40,7 +41,10 @@ export class BirdFormComponent implements OnInit {
 
         this.lineages = ["Verde", "Azul", "Turquesa"];
 
-        this.mutations = new MutationsServices().getList();
+        const Mutations = new MutationsServices();
+
+        this.phenotypes = Mutations.getList(true, false);
+        this.genotypes = Mutations.getList(false, true);
     }
 
     public objectComparisonFunction = function (option, value): boolean {

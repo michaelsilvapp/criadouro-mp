@@ -87,7 +87,7 @@ export class CreationControlFormUpsertComponent implements OnInit {
             "Dezembro"
         ];
 
-        this.mutations = new MutationsServices().getList();
+        this.mutations = new MutationsServices().getList(true, false);
 
         this.postures = [
             "1ª Postura",
