@@ -32,6 +32,7 @@
                                     <mat-select
                                         [(ngModel)]="document.year"
                                         name="year"
+                                        required
                                     >
                                         <mat-option
                                             *ngFor="
@@ -49,6 +50,7 @@
                                     <mat-select
                                         [(ngModel)]="document.month"
                                         name="month"
+                                        required
                                     >
                                         <mat-option
                                             *ngFor="let month of months"
@@ -64,6 +66,7 @@
                                     <mat-select
                                         [(ngModel)]="document.posture"
                                         name="posture"
+                                        required
                                     >
                                         <mat-option
                                             *ngFor="let posture of postures"
@@ -82,6 +85,7 @@
                                         [(ngModel)]="document.male"
                                         name="male"
                                         [compareWith]="onSelectBy"
+                                        required
                                     >
                                         <mat-option
                                             *ngFor="let male of birdsMales"
@@ -102,6 +106,7 @@
                                         [(ngModel)]="document.female"
                                         name="female"
                                         [compareWith]="onSelectBy"
+                                        required
                                     >
                                         <mat-option
                                             *ngFor="let female of birdsFemale"

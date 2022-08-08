@@ -14,9 +14,9 @@ export interface DialogData {
 
 @Component({
     selector: "creation-control-form",
-    templateUrl: "./creation-control-form.component.html"
+    templateUrl: "./creation-control-form-upsert.component.html"
 })
-export class CreationControlFormComponent implements OnInit {
+export class CreationControlFormUpsertComponent implements OnInit {
     public creators: any;
     public lineages: string[];
     public ganders: string[];
@@ -40,7 +40,7 @@ export class CreationControlFormComponent implements OnInit {
     public loading: boolean;
 
     constructor(
-        public dialogRef: MatDialogRef<CreationControlFormComponent>,
+        public dialogRef: MatDialogRef<CreationControlFormUpsertComponent>,
         @Inject(MAT_DIALOG_DATA) public data: DialogData,
         private birdsService: BirdsService,
         private creationControlService: CreationControlService

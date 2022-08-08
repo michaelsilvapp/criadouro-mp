@@ -42,4 +42,12 @@ export class CreationControlService {
             .post(`${this.baseURL}/schedules-posture`, body)
             .toPromise();
     }
+
+    async delete(params) {
+        const body = JSON.stringify(params);
+
+        return this.http
+            .post(`${this.baseURL}/remove-posture`, body)
+            .toPromise();
+    }
 }

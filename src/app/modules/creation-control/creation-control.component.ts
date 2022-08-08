@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { CreationControlFormComponent } from "./creation-control-form/creation-control-form.component";
+import { CreationControlFormUpsertComponent } from "./creation-control-form-upsert/creation-control-form-upsert.component";
+import { CreationControlFormDeleteComponent } from "./creation-control-form-delete/creation-control-form-delete.component";
 import { BirdsService } from "../../services/birds/birds.service";
 import { CreationControlService } from "../../services/creation-control/creation-control.service";
 
@@ -56,23 +57,36 @@ export class CreationControlComponent implements OnInit, OnDestroy {
     }
 
     onOpenDialogCreate() {
-        const dialogRef = this.dialog.open(CreationControlFormComponent, {
+        const dialogRef = this.dialog.open(CreationControlFormUpsertComponent, {
             data: { name: "Cadastrar" }
         });
 
         dialogRef.afterClosed().subscribe((result) => {
-            console.log("result");
             if (result) this.creationControlList.push(result);
         });
     }
 
     onOpenDialogEdit(posture) {
-        const dialogRef = this.dialog.open(CreationControlFormComponent, {
+        const dialogRef = this.dialog.open(CreationControlFormUpsertComponent, {
             data: { name: "Editar", posture }
         });
 
         dialogRef.afterClosed().subscribe((result) => {
             console.log(`Dialog result: ${result}`);
+        });
+    }
+
+    onOpenDialogDelete(posture) {
+        const dialogRef = this.dialog.open(CreationControlFormDeleteComponent, {
+            data: { name: "Remover", posture }
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+                this.creationControlList = this.creationControlList.filter(
+                    (s) => s._id != result._id
+                );
+            }
         });
     }
 

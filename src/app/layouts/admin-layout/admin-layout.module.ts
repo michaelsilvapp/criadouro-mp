@@ -24,7 +24,8 @@ import { BirdFormComponent } from "../../modules/birds/birds-form/birds-form.com
 import { AuthenticationComponent } from "../../modules/authentication/authentication.component";
 
 import { CreationControlComponent } from "../../modules/creation-control/creation-control.component";
-import { CreationControlFormComponent } from "../../modules/creation-control/creation-control-form/creation-control-form.component";
+import { CreationControlFormUpsertComponent } from "../../modules/creation-control/creation-control-form-upsert/creation-control-form-upsert.component";
+import { CreationControlFormDeleteComponent } from "../../modules/creation-control/creation-control-form-delete/creation-control-form-delete.component";
 
 import { AuthGuard } from "../../modules/guard/auth.guard";
 
@@ -65,7 +66,8 @@ import { IMaskModule } from "angular-imask";
         BirdsComponent,
         BirdFormComponent,
         CreationControlComponent,
-        CreationControlFormComponent
+        CreationControlFormUpsertComponent,
+        CreationControlFormDeleteComponent
     ],
     providers: [
         CreatoresServices,

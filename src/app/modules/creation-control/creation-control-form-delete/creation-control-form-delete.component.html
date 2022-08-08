@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Apagar</h1>
+<div mat-dialog-content>
+    Tem certeza que deseja o registro da Gaiola Nº {{ data.posture.birdCage }}
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close class="btn btn-light pull-right">
+        Cancelar
+    </button>
+    <button
+        mat-raised-button
+        class="btn btn-danger pull-right"
+        (click)="onRemove()"
+        [disabled]="loading"
+    >
+        Excluir
+    </button>
+</div>
