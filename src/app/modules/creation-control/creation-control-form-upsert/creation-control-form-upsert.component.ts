@@ -34,6 +34,7 @@ export class CreationControlFormUpsertComponent implements OnInit {
     public birdsMales: any;
 
     public BirdSerices: BirdsService;
+    public mutationsService: MutationsServices;
     public CreationControlService: CreationControlService;
 
     public dateMask = { mask: IMask.MaskedDate };
@@ -87,7 +88,9 @@ export class CreationControlFormUpsertComponent implements OnInit {
             "Dezembro"
         ];
 
-        this.mutations = new MutationsServices().getList(true, false);
+        this.mutationsService = new MutationsServices();
+
+        this.mutations = this.mutationsService.getList(true, false);
 
         this.postures = [
             "1ª Postura",
@@ -135,18 +138,16 @@ export class CreationControlFormUpsertComponent implements OnInit {
         return result
             .filter((b) => b.gander == gander)
             .map((b) => {
-                const _getProps = (prop, separator = " ") => {
-                    const r = [1, 2, 3, 4].map((i) => _.get(b, `${prop}${i}`));
-
-                    return r.filter((r) => r).join(separator);
-                };
-
                 return {
                     _id: b._id,
                     gander: b.gander,
                     code: `${b.creator.code}-${b.year}-${b.washer}`,
-                    phenotype: _getProps("phenotype"),
-                    genotype: _getProps("genotype", ", ")
+                    phenotype: this.mutationsService.getProps(b, "phenotype"),
+                    genotype: this.mutationsService.getProps(
+                        b,
+                        "genotype",
+                        ", "
+                    )
                 };
             });
     }

@@ -4,7 +4,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AdminLayoutRoutes } from "./admin-layout.routing";
 import { DashboardComponent } from "../../dashboard/dashboard.component";
-
+import { IMaskModule } from "angular-imask";
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
 import { MatRippleModule, MatNativeDateModule } from "@angular/material/core";
@@ -17,6 +17,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatCardModule } from "@angular/material/card";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatIconModule } from "@angular/material/icon";
 
 //COMPONENT
 import { BirdsComponent } from "../../modules/birds/birds.component";
@@ -26,8 +27,7 @@ import { AuthenticationComponent } from "../../modules/authentication/authentica
 import { CreationControlComponent } from "../../modules/creation-control/creation-control.component";
 import { CreationControlFormUpsertComponent } from "../../modules/creation-control/creation-control-form-upsert/creation-control-form-upsert.component";
 import { CreationControlFormDeleteComponent } from "../../modules/creation-control/creation-control-form-delete/creation-control-form-delete.component";
-
-import { AuthGuard } from "../../modules/guard/auth.guard";
+import { BirdFormDeleteComponent } from "app/modules/birds/birds-form-delete/birds-form-delete.component";
 
 //SERVICE
 import { CreatoresServices } from "../../services/creators/creators.services";
@@ -35,9 +35,9 @@ import { MutationsServices } from "../../services/mutations/mutations.service";
 import { BirdsService } from "../../services/birds/birds.service";
 import { CreationControlService } from "../../services/creation-control/creation-control.service";
 import { AuthService } from "../../services/auth/auth.service";
+import { AuthGuard } from "../../modules/guard/auth.guard";
 
 import { OktaAuth } from "@okta/okta-auth-js";
-import { IMaskModule } from "angular-imask";
 
 @NgModule({
     imports: [
@@ -58,7 +58,8 @@ import { IMaskModule } from "angular-imask";
         MatNativeDateModule,
         MatCardModule,
         IMaskModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        MatIconModule
     ],
     declarations: [
         DashboardComponent,
@@ -67,7 +68,8 @@ import { IMaskModule } from "angular-imask";
         BirdFormComponent,
         CreationControlComponent,
         CreationControlFormUpsertComponent,
-        CreationControlFormDeleteComponent
+        CreationControlFormDeleteComponent,
+        BirdFormDeleteComponent
     ],
     providers: [
         CreatoresServices,

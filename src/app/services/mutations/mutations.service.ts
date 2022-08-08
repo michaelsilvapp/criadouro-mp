@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { Injectable } from "@angular/core";
 
 @Injectable({
@@ -36,5 +37,11 @@ export class MutationsServices {
         if (genotype) {
             return this.mutationsList.filter((m) => m.genotype);
         }
+    }
+
+    public getProps(bird, prop, separator = " ") {
+        const r = [1, 2, 3, 4].map((i) => _.get(bird, `${prop}${i}`));
+
+        return r.filter((r) => r).join(separator);
     }
 }
