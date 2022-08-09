@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AuthService } from "../../services/auth/auth.service";
-import { filter, Subject, take, takeUntil } from "rxjs";
+import { JwtAuthService } from "../../services/jwt-auth/jwt-auth.service";
+// import { AuthService } from "../../services/auth/auth.service";
+// import { filter, Subject, take, takeUntil } from "rxjs";
+import { Md5 } from "ts-md5/dist/md5";
 
 @Component({
     selector: "authentication",
@@ -12,44 +14,28 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
     public document: any = {};
     public loginValid = true;
 
-    private _destroySub$ = new Subject<void>();
-    private readonly returnUrl: string;
+    constructor(private router: Router, private jwtAuth: JwtAuthService) {}
 
-    constructor(
-        private _route: ActivatedRoute,
-        private _router: Router,
-        private _authService: AuthService
-    ) {
-        this.returnUrl =
-            this._route.snapshot.queryParams["returnUrl"] || "/aves";
-    }
+    public ngOnInit(): void {}
 
-    public ngOnInit(): void {
-        this._authService.isAuthenticated$
-            .pipe(
-                filter((isAuthenticated: boolean) => isAuthenticated),
-                takeUntil(this._destroySub$)
-            )
-            .subscribe((_) => this._router.navigateByUrl(this.returnUrl));
-    }
+    public ngOnDestroy(): void {}
 
-    public ngOnDestroy(): void {
-        this._destroySub$.next();
-    }
-
-    public onSubmit(): void {
+    public async onSubmit() {
         this.loginValid = true;
 
-        this._authService
-            .login(this.document.username, this.document.password)
-            .pipe(take(1))
-            .subscribe({
-                next: (_) => {
-                    console.log("logou");
-                    this.loginValid = true;
-                    this._router.navigateByUrl("/aves");
-                },
-                error: (_) => (this.loginValid = false)
-            });
+        try {
+            const response = await this.jwtAuth.signin(
+                this.document.username,
+                Md5.hashStr(this.document.password)
+            );
+
+            if (response) {
+                this.router.navigateByUrl(this.jwtAuth.return);
+            } else {
+                this.loginValid = false;
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 }

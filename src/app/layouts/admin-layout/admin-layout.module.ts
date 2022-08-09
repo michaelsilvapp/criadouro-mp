@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { AdminLayoutRoutes } from "./admin-layout.routing";
+
 import { DashboardComponent } from "../../dashboard/dashboard.component";
 import { IMaskModule } from "angular-imask";
 import { MatButtonModule } from "@angular/material/button";
@@ -18,6 +18,12 @@ import { MatCardModule } from "@angular/material/card";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatIconModule } from "@angular/material/icon";
+
+//
+import { AdminLayoutRoutes } from "./admin-layout.routing";
+
+//
+import { OktaAuth } from "@okta/okta-auth-js";
 
 //COMPONENT
 import { BirdsComponent } from "../../modules/birds/birds.component";
@@ -35,9 +41,10 @@ import { MutationsServices } from "../../services/mutations/mutations.service";
 import { BirdsService } from "../../services/birds/birds.service";
 import { CreationControlService } from "../../services/creation-control/creation-control.service";
 import { AuthService } from "../../services/auth/auth.service";
-import { AuthGuard } from "../../modules/guard/auth.guard";
-
-import { OktaAuth } from "@okta/okta-auth-js";
+import { AuthGuard } from "../../services/guard/auth.guard";
+import { JwtAuthService } from "../../services/jwt-auth/jwt-auth.service";
+import { UserService } from "../../services/users/users.service";
+import { LocalStoreService } from "../../services/local-store/local-store.service";
 
 @NgModule({
     imports: [
@@ -84,7 +91,10 @@ import { OktaAuth } from "@okta/okta-auth-js";
                 issuer: "https://dev-73372890.okta.com/oauth2/default",
                 clientId: "0oa616n0l7KRx5Uwh5d7"
             })
-        }
+        },
+        JwtAuthService,
+        UserService,
+        LocalStoreService
     ]
 })
 export class AdminLayoutModule {}

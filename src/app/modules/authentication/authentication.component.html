@@ -8,10 +8,6 @@
                 </div>
                 <div class="card-body">
                     <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
-                        <mat-error *ngIf="!loginValid">
-                            Confira se seu E-mail e Senha estão corretos e tente
-                            novamente.
-                        </mat-error>
                         <mat-form-field class="example-full-width">
                             <input
                                 matInput
@@ -32,6 +28,12 @@
                                 required
                             />
                         </mat-form-field>
+
+                        <mat-error *ngIf="!loginValid">
+                            Confira se seu E-mail e Senha estão corretos e tente
+                            novamente.
+                        </mat-error>
+
                         <button
                             mat-button
                             class="btn btn-success pull-right"

@@ -3,7 +3,7 @@ import { AuthenticationComponent } from "app/modules/authentication/authenticati
 import { DashboardComponent } from "../../dashboard/dashboard.component";
 import { BirdsComponent } from "../../modules/birds/birds.component";
 import { CreationControlComponent } from "../../modules/creation-control/creation-control.component";
-import { AuthGuard } from "../../modules/guard/auth.guard";
+import { AuthGuard } from "../../services/guard/auth.guard";
 export const AdminLayoutRoutes: Routes = [
     {
         path: "dashboard",
