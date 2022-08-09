@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import * as Chartist from "chartist";
 
 import { Subject, take, takeUntil } from "rxjs";
-import { AuthService } from "../services/auth/auth.service";
 
 @Component({
     selector: "app-dashboard",
@@ -11,9 +10,8 @@ import { AuthService } from "../services/auth/auth.service";
 })
 export class DashboardComponent implements OnInit {
     public isAuthenticated = false;
-    private _destroySub$ = new Subject<void>();
 
-    constructor(private _authService: AuthService) {}
+    constructor() {}
     startAnimationForLineChart(chart) {
         let seq: any, delays: any, durations: any;
         seq = 0;
@@ -75,13 +73,6 @@ export class DashboardComponent implements OnInit {
         seq2 = 0;
     }
     ngOnInit() {
-        this._authService.isAuthenticated$
-            .pipe(takeUntil(this._destroySub$))
-            .subscribe(
-                (isAuthenticated: boolean) =>
-                    (this.isAuthenticated = isAuthenticated)
-            );
-
         /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
         const dataDailySalesChart: any = {
@@ -184,11 +175,5 @@ export class DashboardComponent implements OnInit {
         this.startAnimationForBarChart(websiteViewsChart);
     }
 
-    public ngOnDestroy(): void {
-        this._destroySub$.next();
-    }
-
-    public logout(): void {
-        this._authService.logout("/").pipe(take(1));
-    }
+    public ngOnDestroy(): void {}
 }

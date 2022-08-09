@@ -29,6 +29,7 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
                 Md5.hashStr(this.document.password)
             );
 
+            console.log(response, this.jwtAuth.return);
             if (response) {
                 this.router.navigateByUrl(this.jwtAuth.return);
             } else {

@@ -22,9 +22,6 @@ import { MatIconModule } from "@angular/material/icon";
 //
 import { AdminLayoutRoutes } from "./admin-layout.routing";
 
-//
-import { OktaAuth } from "@okta/okta-auth-js";
-
 //COMPONENT
 import { BirdsComponent } from "../../modules/birds/birds.component";
 import { BirdFormComponent } from "../../modules/birds/birds-form/birds-form.component";
@@ -40,7 +37,7 @@ import { CreatoresServices } from "../../services/creators/creators.services";
 import { MutationsServices } from "../../services/mutations/mutations.service";
 import { BirdsService } from "../../services/birds/birds.service";
 import { CreationControlService } from "../../services/creation-control/creation-control.service";
-import { AuthService } from "../../services/auth/auth.service";
+
 import { AuthGuard } from "../../services/guard/auth.guard";
 import { JwtAuthService } from "../../services/jwt-auth/jwt-auth.service";
 import { UserService } from "../../services/users/users.service";
@@ -83,15 +80,7 @@ import { LocalStoreService } from "../../services/local-store/local-store.servic
         MutationsServices,
         BirdsService,
         CreationControlService,
-        AuthService,
         AuthGuard,
-        {
-            provide: OktaAuth,
-            useValue: new OktaAuth({
-                issuer: "https://dev-73372890.okta.com/oauth2/default",
-                clientId: "0oa616n0l7KRx5Uwh5d7"
-            })
-        },
         JwtAuthService,
         UserService,
         LocalStoreService

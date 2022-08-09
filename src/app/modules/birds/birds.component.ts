@@ -5,7 +5,6 @@ import { MatDialog } from "@angular/material/dialog";
 import { BirdFormComponent } from "./birds-form/birds-form.component";
 import { BirdsService } from "../../services/birds/birds.service";
 import { BirdFormDeleteComponent } from "./birds-form-delete/birds-form-delete.component";
-import { AuthService } from "../../services/auth/auth.service";
 import { MutationsServices } from "../../services/mutations/mutations.service";
 @Component({
     selector: "birds",
@@ -13,11 +12,7 @@ import { MutationsServices } from "../../services/mutations/mutations.service";
     styleUrls: ["./birds.component.css"]
 })
 export class BirdsComponent implements OnInit, OnDestroy {
-    constructor(
-        public dialog: MatDialog,
-        private birdsService: BirdsService,
-        private _authService: AuthService
-    ) {
+    constructor(public dialog: MatDialog, private birdsService: BirdsService) {
         this.birdsService = birdsService;
     }
 
@@ -45,12 +40,6 @@ export class BirdsComponent implements OnInit, OnDestroy {
             { name: "Ano", value: "year" }
         ];
 
-        this._authService.isAuthenticated$
-            .pipe(takeUntil(this._destroySub$))
-            .subscribe((isAuthenticated: boolean) => {
-                return (this.isAuthenticated = isAuthenticated);
-            });
-
         this.birdsList = await this.list();
 
         this.birdsListBackup = this.birdsList;
@@ -74,10 +63,6 @@ export class BirdsComponent implements OnInit, OnDestroy {
         });
 
         return _.sortBy(list, ["year", "phenotype1"]);
-    }
-
-    public logout(): void {
-        this._authService.logout("/").pipe(take(1));
     }
 
     onOpenDialogCreate() {

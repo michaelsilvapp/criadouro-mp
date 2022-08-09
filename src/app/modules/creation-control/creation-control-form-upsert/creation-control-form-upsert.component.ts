@@ -51,7 +51,6 @@ export class CreationControlFormUpsertComponent implements OnInit {
         this.loading = true;
         if (this.data.posture) {
             this.document = this.data.posture;
-            console.log("this.document", this.document);
         } else {
             this.document.birdsPuppie = [
                 { numberWasher: "", gander: "", genotype: [] },
@@ -62,6 +61,10 @@ export class CreationControlFormUpsertComponent implements OnInit {
                 { numberWasher: "", gander: "", genotype: [] }
             ];
         }
+
+        this.mutationsService = new MutationsServices();
+
+        this.mutations = this.mutationsService.getList(true, false);
 
         this.birdsFemale = await this._getBirdByGander("Fêmea");
 
@@ -87,10 +90,6 @@ export class CreationControlFormUpsertComponent implements OnInit {
             "Novembro",
             "Dezembro"
         ];
-
-        this.mutationsService = new MutationsServices();
-
-        this.mutations = this.mutationsService.getList(true, false);
 
         this.postures = [
             "1ª Postura",

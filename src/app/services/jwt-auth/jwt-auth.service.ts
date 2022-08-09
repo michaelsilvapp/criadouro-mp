@@ -33,7 +33,7 @@ export class JwtAuthService {
         private api: UserService
     ) {
         this.route.queryParams.subscribe(
-            (params) => (this.return = params["return"] || "/")
+            (params) => (this.return = params["return"] || "/aves")
         );
     }
 
