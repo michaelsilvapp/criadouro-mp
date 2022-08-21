@@ -156,7 +156,7 @@ export class CreationControlFormUpsertComponent implements OnInit {
 
         const r = await this.creationControlService.insert(this.document);
 
-        console.log("RESPONSE", _.get(r, "result"));
+        console.log("response ", _.get(r, "result"));
 
         this.dialogRef.close({
             _id: _.get(r, "result"),
@@ -176,6 +176,7 @@ export class CreationControlFormUpsertComponent implements OnInit {
         };
 
         if (this.data.name == "Cadastrar") {
+            console.log("CADASTRANDO ... ");
             if (this.document.dateExpectedBirth)
                 await _setEvent(this.document.dateExpectedBirth, "Nascimento");
 
