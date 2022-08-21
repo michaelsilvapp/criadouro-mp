@@ -1,0 +1,298 @@
+<form #loginForm="ngForm" (submit)="onSave()">
+    <div mat-dialog-content>
+        <mat-progress-bar
+            *ngIf="loading"
+            mode="indeterminate"
+        ></mat-progress-bar>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title">{{ data.name }} Postura</h4>
+                        <!-- <p class="card-category">Adicione </p> -->
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input
+                                        type="number"
+                                        matInput
+                                        [(ngModel)]="document.birdCage"
+                                        name="birdCage"
+                                        placeholder="Gaiola Nº"
+                                        required
+                                    />
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Ano: </mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.year"
+                                        name="year"
+                                        required
+                                    >
+                                        <mat-option
+                                            *ngFor="
+                                                let year of ['2022', '2023']
+                                            "
+                                            [value]="year"
+                                            >{{ year }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-label>Mês</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.month"
+                                        name="month"
+                                        required
+                                    >
+                                        <mat-option
+                                            *ngFor="let month of months"
+                                            [value]="month"
+                                            >{{ month }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-label>Postura</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.posture"
+                                        name="posture"
+                                        required
+                                    >
+                                        <mat-option
+                                            *ngFor="let posture of postures"
+                                            [value]="posture"
+                                            >{{ posture }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Macho</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.male"
+                                        name="male"
+                                        [compareWith]="onSelectBy"
+                                        required
+                                    >
+                                        <mat-option
+                                            *ngFor="let male of birdsMales"
+                                            [value]="male"
+                                        >
+                                            {{ male.code }} -
+                                            {{ male.phenotype }} /
+                                            {{ male.genotype }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Fêmea</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.female"
+                                        name="female"
+                                        [compareWith]="onSelectBy"
+                                        required
+                                    >
+                                        <mat-option
+                                            *ngFor="let female of birdsFemale"
+                                            [value]="female"
+                                        >
+                                            {{ female.code }}
+                                            {{ female.phenotype }} /
+                                            {{ female.genotype }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <input
+                                        type="number"
+                                        matInput
+                                        [(ngModel)]="document.totalEggs"
+                                        name="totalEggs"
+                                        placeholder="Nº de ovos"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <input
+                                        type="text"
+                                        matInput
+                                        name="dateStartPosture"
+                                        [(ngModel)]="document.dateStartPosture"
+                                        placeholder="Data do inicio Choco"
+                                        (focusout)="
+                                            onSetDateSum($event.target.value)
+                                        "
+                                        [imask]="{ mask: '00/00/0000' }"
+                                    />
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <input
+                                        type="text"
+                                        matInput
+                                        name="dateExpectedBirth"
+                                        [(ngModel)]="document.dateExpectedBirth"
+                                        placeholder="Data prevista do Nascimento"
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <input
+                                        type="number"
+                                        matInput
+                                        [(ngModel)]="document.totalPuppies"
+                                        name="totalPuppies"
+                                        placeholder="Nº de filhotes"
+                                    />
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <input
+                                        type="text"
+                                        matInput
+                                        name="dateExpectedRing"
+                                        [(ngModel)]="document.dateExpectedRing"
+                                        placeholder="Data prevista para anilhar"
+                                    />
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <input
+                                        type="text"
+                                        matInput
+                                        name="dateExpectedSeparate"
+                                        [(ngModel)]="
+                                            document.dateExpectedSeparate
+                                        "
+                                        placeholder="Data prevista para separar"
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <hr />
+
+                        <div
+                            class="row"
+                            *ngFor="
+                                let numberOfPuppie of [
+                                    '0',
+                                    '1',
+                                    '2',
+                                    '3',
+                                    '4',
+                                    '5'
+                                ];
+                                let index = index
+                            "
+                        >
+                            <div class="col-md-2">
+                                <mat-form-field class="example-full-width">
+                                    <input
+                                        type="number"
+                                        matInput
+                                        [(ngModel)]="
+                                            document.birdsPuppie[index]
+                                                .numberWasher
+                                        "
+                                        name="{{ 'numberWasher' + index }}"
+                                        placeholder="Nº da anilha"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-2">
+                                <mat-form-field>
+                                    <mat-label>Sexo</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="
+                                            document.birdsPuppie[index].gander
+                                        "
+                                        name="{{ 'gander' + index }}"
+                                    >
+                                        <mat-option
+                                            *ngFor="let gander of ganders"
+                                            [value]="gander"
+                                            >{{ gander }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div
+                                class="col-md-2"
+                                *ngFor="
+                                    let numberGenotype of ['0', '1', '2', '3']
+                                "
+                            >
+                                <mat-form-field>
+                                    <mat-label
+                                        >Fenótipo {{ numberGenotype }}
+                                    </mat-label>
+                                    <mat-select
+                                        [(ngModel)]="
+                                            document.birdsPuppie[index]
+                                                .genotype[numberGenotype]
+                                        "
+                                        name="{{
+                                            'genotype' + index + numberGenotype
+                                        }}"
+                                    >
+                                        <mat-option
+                                            *ngFor="let mutation of mutations"
+                                            [value]="mutation.name"
+                                            >{{ mutation.name }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <mat-dialog-actions align="end">
+        <button
+            mat-raised-button
+            type="submit"
+            class="btn btn-success pull-right"
+            [disabled]="!loginForm.form.valid || loading"
+        >
+            Salvar
+        </button>
+    </mat-dialog-actions>
+</form>

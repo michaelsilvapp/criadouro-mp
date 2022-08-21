@@ -1,0 +1,49 @@
+<div class="main-content">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header card-header-success">
+                    <h4 class="card-title">Login</h4>
+                    <!-- <p class="card-category">Adicione </p> -->
+                </div>
+                <div class="card-body">
+                    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+                        <mat-form-field class="example-full-width">
+                            <input
+                                matInput
+                                placeholder="E-mail"
+                                [(ngModel)]="document.username"
+                                name="username"
+                                required
+                            />
+                            <mat-error> Informe um email valido </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <input
+                                matInput
+                                type="password"
+                                placeholder="Senha"
+                                [(ngModel)]="document.password"
+                                name="password"
+                                required
+                            />
+                        </mat-form-field>
+
+                        <mat-error *ngIf="!loginValid">
+                            Confira se seu E-mail e Senha estão corretos e tente
+                            novamente.
+                        </mat-error>
+
+                        <button
+                            mat-button
+                            class="btn btn-success pull-right"
+                            [disabled]="!loginForm.form.valid"
+                        >
+                            Entrar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

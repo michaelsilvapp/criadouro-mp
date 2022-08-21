@@ -1,0 +1,179 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<div class="main-content">
+    <div class="container-fluid" id="MainContainer">
+        <div class="row justify-content-between" style="width: 100%">
+            <div class="col-md-8">
+                <button
+                    class="btn btn-success"
+                    mat-button
+                    (click)="onOpenDialogCreate()"
+                >
+                    Novo
+                </button>
+            </div>
+
+            <div class="col-md-4">
+                <form #searchForm="ngForm">
+                    <div class="row">
+                        <!-- <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Buscar por: </mat-label>
+                                <mat-select
+                                    [(ngModel)]="document.criterion"
+                                    name="criterion"
+                                    required
+                                >
+                                    <mat-option
+                                        *ngFor="let criterion of searchBy"
+                                        [value]="criterion.value"
+                                        >{{ criterion.name }}</mat-option
+                                    >
+                                </mat-select>
+                            </mat-form-field>
+                        </div> -->
+                        <div class="col-md-7">
+                            <mat-form-field appearance="legacy">
+                                <input
+                                    matInput
+                                    [(ngModel)]="document.search"
+                                    placeholder="Pesquisar"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button
+                                        class="btn btn-white btn-round btn-just-icon"
+                                        mat-button
+                                        (click)="onSearch()"
+                                        [disabled]="!document.search"
+                                    >
+                                        <i class="material-icons">search</i>
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button
+                                        class="btn btn-white btn-round btn-just-icon"
+                                        mat-button
+                                        (click)="onClearSearch()"
+                                        *ngIf="searchActive"
+                                    >
+                                        <i class="material-icons">backspace</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row" id="SubContainer">
+            <div class="col-md-12" id="BodyContainer">
+                <div class="card" id="CardContainer">
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title">Forpus</h4>
+                        <p class="card-category">Aves do Plantel</p>
+                    </div>
+                    <div class="card-body" *ngIf="birdsList.length">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="text-success">
+                                    <th>#</th>
+                                    <th>Anilha</th>
+                                    <th>Ano</th>
+                                    <th>Criador</th>
+
+                                    <th>Fenótipo</th>
+                                    <th>Genótipo</th>
+                                    <th>Sexo</th>
+                                    <th>Peso</th>
+                                    <th>Ações</th>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="
+                                            let birdItem of birdsList;
+                                            let index = index
+                                        "
+                                    >
+                                        <td class="text-left">
+                                            #{{ index + 1 }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ birdItem.washer }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ birdItem.year }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ birdItem.creator.name }}:
+                                            {{ birdItem.creator.code }}
+                                        </td>
+
+                                        <td class="text-left">
+                                            {{ birdItem.phenotype1 }}
+                                            {{ birdItem.phenotype2 }}
+                                            {{ birdItem.phenotype3 }}
+                                            {{ birdItem.phenotype4 }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ birdItem.genotype1 }}
+                                            {{ birdItem.genotype2 }}
+                                            {{ birdItem.genotype3 }}
+                                            {{ birdItem.genotype4 }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ birdItem.gander }}
+                                        </td>
+                                        <td class="text-left">
+                                            {{ birdItem.weight }}g
+                                        </td>
+
+                                        <!-- <td class="text-primary">$36,738</td> -->
+                                        <td class="td-actions text-left">
+                                            <button
+                                                mat-raised-button
+                                                type="button"
+                                                matTooltip="Editar"
+                                                (click)="
+                                                    onOpenDialogEdit(birdItem)
+                                                "
+                                                [matTooltipPosition]="'above'"
+                                                class="btn btn-primary btn-link btn-sm btn-just-icon"
+                                            >
+                                                <i class="material-icons"
+                                                    >edit</i
+                                                >
+                                            </button>
+                                            <button
+                                                mat-raised-button
+                                                type="button"
+                                                matTooltip="Remove"
+                                                [matTooltipPosition]="'above'"
+                                                (click)="
+                                                    onOpenDialogDelete(birdItem)
+                                                "
+                                                class="btn btn-danger btn-link btn-sm btn-just-icon"
+                                            >
+                                                <i class="material-icons"
+                                                    >close</i
+                                                >
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div *ngIf="document.search && !birdsList.length">
+                        TEM NADA AQUI :(
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

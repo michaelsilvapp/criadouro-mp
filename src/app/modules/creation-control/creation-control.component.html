@@ -1,0 +1,137 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+<div class="main-content">
+    <div class="container-fluid" id="MainContainer">
+        <div class="row" style="width: 100%">
+            <div class="col-md-2">
+                <button
+                    class="btn btn-success"
+                    mat-button
+                    (click)="onOpenDialogCreate()"
+                >
+                    Novo
+                </button>
+            </div>
+            <div class="col-md-3 offset-md-7">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Ano da Temporada: </mat-label>
+                    <mat-select [(ngModel)]="year" name="year">
+                        <mat-option *ngFor="let year of years" [value]="year">{{
+                            year
+                        }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row" id="SubContainer">
+            <div class="col-md-12" id="BodyContainer">
+                <div class="card" id="CardContainer">
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title">Posturas</h4>
+                        <p class="card-category">
+                            Controle de Criação Temporada
+                        </p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="text-success">
+                                    <th>Gaiola Nº</th>
+                                    <th>Postura</th>
+                                    <th>Macho</th>
+                                    <th>Fêmea</th>
+                                    <th>Total de Ovos</th>
+                                    <th>Total de Filhotes</th>
+
+                                    <th class="text-left">Ações</th>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="
+                                            let creationControlItem of creationControlList
+                                        "
+                                    >
+                                        <td>
+                                            {{ creationControlItem.birdCage }}
+                                        </td>
+
+                                        <td>
+                                            {{ creationControlItem.posture }}
+                                        </td>
+
+                                        <td>
+                                            {{
+                                                creationControlItem.male
+                                                    .phenotype
+                                            }}
+                                            |
+                                            {{ creationControlItem.male.code }}
+                                        </td>
+
+                                        <td>
+                                            {{
+                                                creationControlItem.female
+                                                    .phenotype
+                                            }}
+                                            |
+
+                                            {{
+                                                creationControlItem.female.code
+                                            }}
+                                        </td>
+
+                                        <td>
+                                            {{ creationControlItem.totalEggs }}
+                                        </td>
+
+                                        <td>
+                                            {{
+                                                creationControlItem.totalPuppies
+                                            }}
+                                        </td>
+
+                                        <!-- <td class="text-primary">$36,738</td> -->
+                                        <td class="td-actions text-left">
+                                            <button
+                                                mat-raised-button
+                                                type="button"
+                                                matTooltip="Editar"
+                                                (click)="
+                                                    onOpenDialogEdit(
+                                                        creationControlItem
+                                                    )
+                                                "
+                                                [matTooltipPosition]="'above'"
+                                                class="btn btn-primary btn-link btn-sm btn-just-icon"
+                                            >
+                                                <i class="material-icons"
+                                                    >edit</i
+                                                >
+                                            </button>
+                                            <button
+                                                mat-raised-button
+                                                type="button"
+                                                matTooltip="Remove"
+                                                [matTooltipPosition]="'above'"
+                                                (click)="
+                                                    onOpenDialogDelete(
+                                                        creationControlItem
+                                                    )
+                                                "
+                                                class="btn btn-danger btn-link btn-sm btn-just-icon"
+                                            >
+                                                <i class="material-icons"
+                                                    >close</i
+                                                >
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
