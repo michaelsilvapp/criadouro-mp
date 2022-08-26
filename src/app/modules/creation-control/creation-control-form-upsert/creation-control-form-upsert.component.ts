@@ -154,9 +154,44 @@ export class CreationControlFormUpsertComponent implements OnInit {
     async onSave() {
         this.loading = true;
 
-        const r = await this.creationControlService.insert(this.document);
+        for (let i = 0; i < this.document.birdsPuppie.length; i++) {
+            const puppie = this.document.birdsPuppie[i];
 
-        console.log("response ", _.get(r, "result"));
+            if (puppie.numberWasher && !puppie._id) {
+                const phenotypes = {};
+
+                puppie.genotype.forEach((p, i) => {
+                    phenotypes[`phenotype${i + 1}`] = p;
+                });
+
+                const _getParent = (parent) => {
+                    return {
+                        code: parent.code,
+                        _id: parent._id
+                    };
+                };
+
+                const bird = {
+                    creator: { name: "Michael", code: "OT-128" },
+                    gander: puppie.gander,
+                    ...phenotypes,
+                    status: "ATIVO",
+                    washer: puppie.numberWasher,
+                    year: this.document.year,
+                    parents: {
+                        female: _getParent(this.document.female),
+                        male: _getParent(this.document.male)
+                    },
+                    dateapproximate: _.get(this.document, "dateExpectedBirth")
+                };
+
+                const r = await this.birdsService.insert(bird);
+
+                this.document.birdsPuppie[i]._id = _.get(r, "result");
+            }
+        }
+
+        const r = await this.creationControlService.insert(this.document);
 
         this.dialogRef.close({
             _id: _.get(r, "result"),

@@ -54,8 +54,6 @@ export class BirdFormComponent implements OnInit {
     async onSave() {
         const r = await this.birdsService.insert(this.document);
 
-        console.log("RESPONSE", _.get(r, "result"));
-
         this.dialogRef.close({ _id: _.get(r, "result"), ...this.document });
     }
 }
