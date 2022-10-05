@@ -20,6 +20,8 @@ export class BirdFormComponent implements OnInit {
     public phenotypes: any[];
     public genotypes: any[];
 
+    public loading: boolean;
+
     public BirdSerices: BirdsService;
 
     public document: any = {};
@@ -31,6 +33,8 @@ export class BirdFormComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.loading = true;
+
         if (this.data.bird) {
             this.document = this.data.bird;
         }
@@ -45,6 +49,8 @@ export class BirdFormComponent implements OnInit {
 
         this.phenotypes = Mutations.getList(true, false);
         this.genotypes = Mutations.getList(false, true);
+
+        this.loading = false;
     }
 
     public objectComparisonFunction = function (option, value): boolean {
@@ -52,8 +58,12 @@ export class BirdFormComponent implements OnInit {
     };
 
     async onSave() {
+        this.loading = true;
+
         const r = await this.birdsService.insert(this.document);
 
         this.dialogRef.close({ _id: _.get(r, "result"), ...this.document });
+
+        this.loading = false;
     }
 }

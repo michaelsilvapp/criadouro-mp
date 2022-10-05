@@ -210,14 +210,13 @@ export class CreationControlFormUpsertComponent implements OnInit {
             });
         };
 
-        if (this.data.name == "Cadastrar") {
-            console.log("CADASTRANDO ... ");
-            if (this.document.dateExpectedBirth)
-                await _setEvent(this.document.dateExpectedBirth, "Nascimento");
+        // if (this.data.name == "Cadastrar") {
+        //     if (this.document.dateExpectedBirth)
+        //         await _setEvent(this.document.dateExpectedBirth, "Nascimento");
 
-            if (this.document.dateExpectedRing)
-                await _setEvent(this.document.dateExpectedRing, "Anilhamento");
-        }
+        //     if (this.document.dateExpectedRing)
+        //         await _setEvent(this.document.dateExpectedRing, "Anilhamento");
+        // }
 
         this.loading = false;
     }
