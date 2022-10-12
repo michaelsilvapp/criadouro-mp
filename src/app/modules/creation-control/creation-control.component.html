@@ -3,7 +3,7 @@
 <div class="main-content">
     <div class="container-fluid" id="MainContainer">
         <div class="row" style="width: 100%">
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <button
                     class="btn btn-success"
                     mat-button
@@ -12,15 +12,36 @@
                     Novo
                 </button>
             </div>
-            <div class="col-md-3 offset-md-7">
-                <mat-form-field class="example-full-width">
-                    <mat-label>Ano da Temporada: </mat-label>
-                    <mat-select [(ngModel)]="year" name="year">
-                        <mat-option *ngFor="let year of years" [value]="year">{{
-                            year
-                        }}</mat-option>
+
+            <div class="col-md-4">
+                <mat-form-field>
+                    <mat-label>Status: </mat-label>
+                    <mat-select [(ngModel)]="status" name="status">
+                        <mat-option
+                            [value]="statu"
+                            *ngFor="
+                                let statu of [
+                                    'EM POSTURA',
+                                    'FINALIZADA COM FILHOTES',
+                                    'FINALIZADA SEM FILHOTES',
+                                    'INTERROMPIDA'
+                                ]
+                            "
+                            (click)="onSelected('status', statu)"
+                            >{{ statu }}</mat-option
+                        >
                     </mat-select>
                 </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <button
+                    class="btn btn-white btn-round btn-just-icon"
+                    mat-button
+                    (click)="onClearSearch()"
+                    *ngIf="status"
+                >
+                    <i class="material-icons">backspace</i>
+                </button>
             </div>
         </div>
         <div class="row" id="SubContainer">
@@ -37,11 +58,10 @@
                             <table class="table table-bordered">
                                 <thead class="text-success">
                                     <th>Gaiola Nº</th>
+                                    <th>Status</th>
                                     <th>Postura</th>
                                     <th>Macho</th>
                                     <th>Fêmea</th>
-                                    <th>Total de Ovos</th>
-                                    <th>Total de Filhotes</th>
 
                                     <th class="text-left">Ações</th>
                                 </thead>
@@ -53,6 +73,10 @@
                                     >
                                         <td>
                                             {{ creationControlItem.birdCage }}
+                                        </td>
+
+                                        <td>
+                                            {{ creationControlItem.status }}
                                         </td>
 
                                         <td>
@@ -77,16 +101,6 @@
 
                                             {{
                                                 creationControlItem.female.code
-                                            }}
-                                        </td>
-
-                                        <td>
-                                            {{ creationControlItem.totalEggs }}
-                                        </td>
-
-                                        <td>
-                                            {{
-                                                creationControlItem.totalPuppies
                                             }}
                                         </td>
 

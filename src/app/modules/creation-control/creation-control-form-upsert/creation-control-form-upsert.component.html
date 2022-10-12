@@ -35,6 +35,29 @@
                             </div>
 
                             <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-label>Status</mat-label>
+                                    <mat-select
+                                        [(ngModel)]="document.status"
+                                        name="status"
+                                    >
+                                        <mat-option
+                                            *ngFor="
+                                                let status of [
+                                                    'EM POSTURA',
+                                                    'FINALIZADA COM FILHOTES',
+                                                    'FINALIZADA SEM FILHOTES',
+                                                    'INTERROMPIDA'
+                                                ]
+                                            "
+                                            [value]="status"
+                                            >{{ status }}</mat-option
+                                        >
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-2">
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Ano: </mat-label>
                                     <mat-select
@@ -52,7 +75,7 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <mat-form-field>
                                     <mat-label>Mês</mat-label>
                                     <mat-select
@@ -68,7 +91,7 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <mat-form-field>
                                     <mat-label>Postura</mat-label>
                                     <mat-select

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { CreationControlFormUpsertComponent } from "./creation-control-form-upsert/creation-control-form-upsert.component";
 import { CreationControlFormDeleteComponent } from "./creation-control-form-delete/creation-control-form-delete.component";
@@ -12,7 +12,7 @@ import { Subject, take, takeUntil } from "rxjs";
     templateUrl: "./creation-control.component.html",
     styleUrls: ["./creation-control.css"]
 })
-export class CreationControlComponent implements OnInit, OnDestroy {
+export class CreationControlComponent implements OnInit {
     constructor(
         public dialog: MatDialog,
         private birdsService: BirdsService,
@@ -28,24 +28,25 @@ export class CreationControlComponent implements OnInit, OnDestroy {
 
     public year: number;
     public years: number[];
+    public status: string;
 
     public creationControlList: any[];
 
     async ngOnInit() {
         this.loading = true;
 
-        this.year = 2022;
+        this.year = new Date().getFullYear();
         this.years = [2022, 2023, 2024, 2025];
 
-        this.creationControlList = await this.list(this.year);
+        this.creationControlList = await this.list();
 
         this.loading = false;
     }
 
-    async list(year) {
+    async list() {
         let list = await this.creationControlService.get({});
 
-        list = list.filter((l) => parseInt(l.year) == year);
+        // list = list.filter((l) => parseInt(l.year) == year);
 
         return list;
     }
@@ -84,5 +85,16 @@ export class CreationControlComponent implements OnInit, OnDestroy {
         });
     }
 
-    public ngOnDestroy(): void {}
+    async onSelected(selectBy, value) {
+        let list = await this.creationControlService.get({});
+
+        this.creationControlList = list.filter((l) => l[selectBy] == value);
+
+        return list;
+    }
+
+    async onClearSearch() {
+        this.status = null;
+        this.creationControlList = await this.creationControlService.get({});
+    }
 }
