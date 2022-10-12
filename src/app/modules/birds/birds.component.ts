@@ -54,6 +54,8 @@ export class BirdsComponent implements OnInit, OnDestroy {
     async list() {
         let list = await this.birdsService.get({});
 
+        list = list.filter((bird) => bird.status == "ATIVO");
+
         list = list.map((bird) => {
             return {
                 ...bird,
@@ -119,7 +121,8 @@ export class BirdsComponent implements OnInit, OnDestroy {
                 _match("phenotype") ||
                 _match("washer") ||
                 _match("creator.name") ||
-                _match("creator.code")
+                _match("creator.code") ||
+                _match("gander")
             );
         });
     }
