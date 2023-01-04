@@ -11,7 +11,8 @@ export class CreatoresServices {
         { name: "Ricardo Lucio", code: "IB-110" },
         { name: "Ademar Tallmann", code: "MG-175" },
         { name: "Michael", code: "OT-128" },
-        { name: "Jean", code: "ML-345" }
+        { name: "Jean", code: "ML-345" },
+        { name: "Leo", code: "OT-1003" }
     ];
 
     constructor() {}
